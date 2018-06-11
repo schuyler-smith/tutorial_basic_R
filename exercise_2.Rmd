@@ -174,7 +174,15 @@ A list is exactly that. It's similar to a vector, it contains other objects, but
 ```{r}
 our_list <- list("a", 0, TRUE)
 ```
-If you call `our_list` you will see that it looks different than the vector but also each element is not forced to be a character. 
+If you call `our_list` you will see that it looks different than the vector before, but also each element is not forced to be a character. 
+
+A list can be made up of any object we want.
+```{r}
+our_list <- list(c("a","b"), our_vector_no_na, our_list)
+```
+For this reason lists are both great and dangerous. Indexing in a list gives a lot of users a lot of trouble. I will try to break it down to be as simple as possible.
+
+It sucks, don't do it. Burn the code, put it in the trash can, and move on.
 
 <br>
 

@@ -318,6 +318,9 @@ div.tocify {
 <p>If you did copy-paste the snippet above, or if you typed it verbatim, you will notice that R ran all three operations independently from the single input. This is because in R-scripting a ‘;’ semi-colon represents a line break so that you can put multiple lines of the script together. This is not a common practice as it does not add functionality, it is more difficult to read when scripts get more dense, and its only purpose is aesthetics. However, this is a good thing to be aware of and keep in-mind as you write your own scripts.</p>
 <p>Try running the above snippet without the semi-colons.</p>
 <pre class="r"><code>2 - 3 2 * 3 4 / 2</code></pre>
+<pre><code>## Error: &lt;text&gt;:1:7: unexpected numeric constant
+## 1: 2 - 3 2
+##           ^</code></pre>
 <p>Error: unexpected numeric constant in “2 - 3 2”</p>
 <p>Often errors in R (and most scripting/programming languages} are not easily interpreted by beginners. This one is fairly simple, “unexpected numeric constant” is referring to the second 2. R reads the line from left to right and after the 3 there is no operation to tell R how to handle the second 2, so it errors.</p>
 </div>
@@ -325,20 +328,26 @@ div.tocify {
 <h1>Whitespace</h1>
 <p>“Whitespace”, that is spaces between commands, is generally ignored by R. It can handle any amount of whitespace in the middle of operations:</p>
 <pre class="r"><code>2 - 3</code></pre>
+<pre><code>## [1] -1</code></pre>
 <p>is the same as</p>
 <pre class="r"><code>2-3</code></pre>
+<pre><code>## [1] -1</code></pre>
 <p>is the same as</p>
 <pre class="r"><code>2-        3</code></pre>
+<pre><code>## [1] -1</code></pre>
 <p>Because as it reads from left to right it knows what to expect after the ‘-’ and ignores the whitespace until it finds a numeric.</p>
 <p>Where we had</p>
 <pre class="r"><code>2-3 4</code></pre>
-<p>It is looking for an operation after the 3 and finds only whitespace before a new numeric. Because R reads from left to right. Alternatively, if you give an operation and don’t follow it up with an argument then R will wait for you to complete it:</p>
-<p>2 - ``` If you don’t want to type out the remaining part and just want to complete the line in your script and rerun it you can hit the escape ‘Esc’ button to cancel the command. Escape is the universal ‘STOP’ button in R.</p>
+<p>It is looking for an operation after the 3 and finds only whitespace before a new numeric. Because R reads from left to right.</p>
+<p>Alternatively, if you give an operation and don’t follow it up with an argument then R will wait for you to complete it:</p>
+<pre class="r"><code>2 - </code></pre>
+<p>If you don’t want to type out the remaining part and just want to complete the line in your script and rerun it you can hit the escape ‘Esc’ button to cancel the command. Escape is the universal ‘STOP’ button in R.</p>
 </div>
 <div id="order-of-operations" class="section level1">
 <h1>Order of Operations</h1>
 <p>R reads from left to right but it reads the entire line before execution. This allows R to do mathematical order of operations. Try it.</p>
 <pre class="r"><code>2 + 2 * 3</code></pre>
+<pre><code>## [1] 8</code></pre>
 <p>R adheres to “PEMDAS” Parentheses, Exponents, Multiplication/Division, Addition/Subtraction.</p>
 <ul>
 <li>Parenthases <code>( )</code></li>
@@ -354,16 +363,20 @@ div.tocify {
 <h1>Scientific Notation</h1>
 <p>R prints large and small numbers in scientific notation by default</p>
 <pre class="r"><code>1/10000</code></pre>
+<pre><code>## [1] 1e-04</code></pre>
 <p>If for any reason you really do not want R to use scientific notation, one way to prevent this for an entire session is to enter into the consoel</p>
 <pre class="r"><code>options(scipen=999)</code></pre>
 <p>In short, this is an option to the session to tell R how many digits (beyond the default 6) to allow before the use of scientific notation. To revert it within the same session use</p>
 <pre class="r"><code>options(scipen=0)</code></pre>
 <p>If you want just a particular command to not be in scientific notation (or to be) use</p>
 <pre class="r"><code>format(1/10000, scientific=FALSE)</code></pre>
+<pre><code>## [1] &quot;0.0001&quot;</code></pre>
 <p>or</p>
 <pre class="r"><code>format(1/10000, scientific=TRUE)</code></pre>
-<p>Note that this function does not return the number as a numeric and R does not have intuitive data-type handling, but it can be told how to</p>
+<pre><code>## [1] &quot;1e-04&quot;</code></pre>
+<p>Note that this function does not return the number as a numeric (you can tell this because the output is contained in quotation marks) and R does not have intuitive data-type handling, but it can be told how to.</p>
 <pre class="r"><code>as.numeric(format(1/10000, scientific=FALSE))</code></pre>
+<pre><code>## [1] 1e-04</code></pre>
 </div>
 <div id="functions" class="section level1">
 <h1>Functions</h1>
@@ -378,15 +391,16 @@ div.tocify {
 <p>Gives us the trigonometric value for sine of 1.</p>
 <p>More complex functions can take arguments that give options for the function, as seen before with <code>format()</code>. <code>sum()</code> can take option arguments also</p>
 <pre class="r"><code>sum(2,2,4,NA)</code></pre>
+<pre><code>## [1] NA</code></pre>
 <p>Returns <code>NA</code>, but we can tell the function to ignore missing data</p>
 <pre class="r"><code>sum(2,2,4,NA, na.rm=TRUE)</code></pre>
 <p>Sometimes functions need these options to be declared. The function <code>runif()</code> (random-uniform), is a random number generator. It requires 3 arguments to run.</p>
 <pre class="r"><code>runif(1,0,10)</code></pre>
 <p>If we run it without any arguments</p>
 <pre class="r"><code>runif()</code></pre>
-<p>We get an error.<code>argument &quot;n&quot; is missing, with no default</code>. What does this mean.. every function in R or a package for R has a hlp page and can be accessed by typing <code>?function</code> into the console.</p>
+<p>We get an error.<code>argument &quot;n&quot; is missing, with no default</code>. What does this mean? Well, every function in R or a package for R has a help page and can be accessed by typing <code>?function</code> into the console (or searched online).</p>
 <pre class="r"><code>?runif</code></pre>
-<p>Under <strong>Arguments</strong> we see that <code>n</code> us the number of times the function generate a random number. So if we correct the error and give a value to n.</p>
+<p>Under <strong>Arguments</strong> we see that <code>n</code> is the number of times the function generate a random number. So if we correct the error and give a value to n.</p>
 <pre class="r"><code>runif(n=2)</code></pre>
 <p>It runs without error.</p>
 <p>But I said it required 3 arguments.. and it does. Most functions are written so that only a single value is needed to be give, the other arguments are given default values. In the help pages these can be seen under <strong>Usage</strong> where it says</p>
@@ -403,6 +417,7 @@ div.tocify {
 <p>It formatted the number first, then it made it numeric. Nesting is never necessary, but often very practical, however if not used wisely can lead to some issues.</p>
 <p>Another example of nesting</p>
 <pre class="r"><code>sin(sum(2,3,sum(1,NA,4,na.rm=TRUE)))</code></pre>
+<pre><code>## [1] -0.5440211</code></pre>
 <p>Hopefully, you can see how this can get messy quickly, and very difficult to follow.. and a headache to debug if it does not work correctly. The more familiar you become with R, the easier long nested functions become to read, but if you are collaborating with someone who is not as well-versed it is just easier for everyone to keep it simple. The best way to do that is with the assignment of variables.</p>
 </div>
 </div>
@@ -476,35 +491,38 @@ div.tocify {
 <h3>Logical Operators</h3>
 <p>Logical operators execute Boolean arguments.</p>
 <ul>
-<li><p>Logical-not <code>!</code></p>
+<li>Logical-not <code>!</code> Gives the binary opposite.</li>
+</ul>
 <pre class="r"><code>x &lt;- c(FALSE,TRUE,0,1)
 !x</code></pre>
-Gives the binary opposite.</li>
-<li><p>And <code>&amp;</code></p>
+<ul>
+<li>And <code>&amp;</code> Checks binary values of each element-pair, returns TRUE if both are TRUE.</li>
+</ul>
 <pre class="r"><code>y &lt;- c(FALSE,TRUE,1,0)
 x&amp;y</code></pre>
-Checks binary values of each element-pair, returns TRUE if both are TRUE.</li>
-<li><p>Logical-and <code>&amp;&amp;</code></p>
+<ul>
+<li>Logical-and <code>&amp;&amp;</code> Checks if all elements are TRUE in both objects.</li>
+</ul>
 <pre class="r"><code>x &lt;- c(TRUE,1)
 y &lt;- c(TRUE,0)
-x&amp;y
+x&amp;&amp;y
 y &lt;- c(TRUE,1)
-x&amp;y</code></pre>
-Checks if all elements are TRUE in both objects.</li>
-<li><p>Or <code>|</code></p>
+x&amp;&amp;y</code></pre>
+<ul>
+<li>Or <code>|</code> Checks if each element-pair has at least one TRUE value.</li>
+</ul>
 <pre class="r"><code>y &lt;- c(TRUE,0)
 x|y
 y &lt;- c(TRUE,1)
 x|y</code></pre>
-Checks if each element-pair has at least one TRUE value.</li>
-<li><p>Logical-or <code>||</code></p>
+<ul>
+<li>Logical-or <code>||</code> Checks if either object has at least one TRUE value.</li>
+</ul>
 <pre class="r"><code>x &lt;- c(FALSE,0)
 y &lt;- c(FALSE,0)
 x||y
 y &lt;- c(TRUE,0)
 x||y</code></pre>
-<p>Checks if either object has at least one TRUE value.</p></li>
-</ul>
 </div>
 <div id="relational-operators" class="section level3">
 <h3>Relational Operators</h3>
@@ -534,6 +552,7 @@ x &lt; y || x == y</code></pre>
 <p>R is an open-source program. This means that anyone is allowed to contribute to it, and most commonly this is done in the form of packages. Packages are are essentially a collection of custom functions. The need to install these packages is because sometimes they can be rather large and there are over 12,500 <a href="https://cran.r-project.org/web/packages/available_packages_by_name.html">packages maintained in CRAN</a>. To keep R lightweight these packages are installed and opened in each session on-demand, and only base-R is loaded into each session by default.</p>
 <p>To demonstrate this, let’s call a commonly used function, <code>melt()</code>. There is no need to use the function, so I will not explain its use in this tutorial, just try calling it in the console.</p>
 <pre class="r"><code>melt()</code></pre>
+<pre><code>## Error in melt(): could not find function &quot;melt&quot;</code></pre>
 <p><code>Error in melt() : could not find function &quot;melt&quot;</code> The session has no function assigned to <code>melt()</code>. Now let’s install the package that defines what <code>melt()</code> is.</p>
 <pre class="r"><code>install.packages(&#39;reshape2&#39;)</code></pre>
 <p>When using <code>install.packages()</code> the name of the package you want to install must be contained in quotations (R treats single and double-quote the same way). You will notice that R wrote a lot of messages to the console. Mostly this is just transparency in what is going on and typically unimportant unless the last thing it says is <code>ERROR</code>.. then something went wrong. If you are positive that the package will install without an error and you don’t care for all that stuff printed to your console, there’s an option for that!</p>
@@ -543,6 +562,7 @@ x &lt; y || x == y</code></pre>
 <p>Notice quotations are not needed to use <code>library</code>, however it will work with or without them.</p>
 <p>Now lets try to call our function again.</p>
 <pre class="r"><code>melt()</code></pre>
+<pre><code>## Error in melt(): argument &quot;data&quot; is missing, with no default</code></pre>
 <p>We have a new error! Now it is saying we didn’t supply the correct arguments to the function, so the new function from our package is loaded into our session! Packages make R super powerful because it’s a great way to share code, and one of the primary rules of coding is to ‘never write something that’s already been written’. I don’t know for sure if that is actually a something that’s taught.. but I think it’s a good philosophy.</p>
 </div>
 

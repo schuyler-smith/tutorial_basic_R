@@ -5,12 +5,12 @@ title: "Getting Started with R"
 
 When we first open R, we see a console. We can type into this console and use it as a calculator. Try.
 
-```R
+```{r eval=FALSE}
 1 + 1
 ```
 It adds the two numbers and prints the sum to the console. R can do all sorts of math and arithmetic; try several other operations. (i.e.)
 
-```R
+```{r  eval=FALSE}
 2 - 3; 2 * 3; 4 / 2
 ```
 You *can* copy-paste these into the terminal, but I would not recommend that. For most things in this tutorial, try typing them out. It's like taking notes in class, it takes more effort but it helps to actually process what is happening. And, after-all, we are here to learn and practice, not just get the assignment done :sunglasses:.
@@ -19,7 +19,7 @@ If you did copy-paste the snippet above, or if you typed it verbatim, you will n
 
 Try running the above snippet without the semi-colons.
 
-```R
+```{r error=TRUE}
 2 - 3 2 * 3 4 / 2
 ```
 Error: unexpected numeric constant in "2 - 3 2"
@@ -28,25 +28,27 @@ Often errors in R (and most scripting/programming languages} are not easily inte
 
 # Whitespace
 "Whitespace", that is spaces between commands, is generally ignored by R. It can handle any amount of whitespace in the middle of operations:
-```R
+```{r}
 2 - 3
 ```
 is the same as
-```R
+```{r}
 2-3
 ```
 is the same as
-```R
+```{r}
 2-        3
 ```
 Because as it reads from left to right it knows what to expect after the '-' and ignores the whitespace until it finds a numeric.
 
 Where we had
-```R
+```{r eval=FALSE}
 2-3 4
 ```
-It is looking for an operation after the 3 and finds only whitespace before a new numeric. Because R reads from left to right. Alternatively, if you give an operation and don't follow it up with an argument then R will wait for you to complete it:
+It is looking for an operation after the 3 and finds only whitespace before a new numeric. Because R reads from left to right. 
 
+Alternatively, if you give an operation and don't follow it up with an argument then R will wait for you to complete it:
+```{r eval=FALSE}
 2 - 
 ```
 If you don't want to type out the remaining part and just want to complete the line in your script and rerun it you can hit the escape 'Esc' button to cancel the command. Escape is the universal 'STOP' button in R.
@@ -55,7 +57,7 @@ If you don't want to type out the remaining part and just want to complete the l
 
 R reads from left to right but it reads the entire line before execution. This allows R to do mathematical order of operations. Try it.
 
-```R
+```{r}
 2 + 2 * 3
 ```
 R adheres to "PEMDAS" Parentheses, Exponents, Multiplication/Division, Addition/Subtraction.
@@ -65,10 +67,10 @@ R adheres to "PEMDAS" Parentheses, Exponents, Multiplication/Division, Addition/
 * Multiplication/Division `*`	`/`
 * Addition/Subtraction `+`	`-`
 
-```R
+```{r eval=FALSE}
 2 + 2^3
 ```
-```R
+```{r eval=FALSE}
 (2 + 2)^3
 ```
 Using parentheses can be good practice for ensuring correct order of operations and also making long equations easier to read.
@@ -77,28 +79,28 @@ Using parentheses can be good practice for ensuring correct order of operations 
 
 R prints large and small numbers in scientific notation by default
 
-```R
+```{r}
 1/10000
 ```
 If for any reason you really do not want R to use scientific notation, one way to prevent this for an entire session is to enter into the consoel
-```R
+```{r}
 options(scipen=999)
 ```
 In short, this is an option to the session to tell R how many digits (beyond the default 6) to allow before the use of scientific notation. To revert it within the same session use 
-```R
+```{r}
 options(scipen=0)
 ```
 
 If you want just a particular command to not be in scientific notation (or to be) use
-```R
+```{r}
 format(1/10000, scientific=FALSE)
 ```
 or 
-```R
+```{r}
 format(1/10000, scientific=TRUE)
 ```
-Note that this function does not return the number as a numeric and R does not have intuitive data-type handling, but it can be told how to
-```R
+Note that this function does not return the number as a numeric (you can tell this because the output is contained in quotation marks) and R does not have intuitive data-type handling, but it can be told how to.
+```{r}
 as.numeric(format(1/10000, scientific=FALSE))
 ```
 
@@ -108,58 +110,58 @@ R has many functions. Many are included with R itself (known as base-R), and man
 
 Another, more simple, example is the function `sum()`
 
-```R
+```{r eval=FALSE}
 sum(2,2,4)
 ```
 performs the operations
-```R
+```{r eval=FALSE}
 2 + 2 + 4
 ```
 All functions are called with their name with the arguments in parentheses.
 
 Another example is `sin()` or `log()`
-```R
+```{r eval=FALSE}
 sin(1)
 ```
 Gives us the trigonometric value for sine of 1.
 
 More complex functions can take arguments that give options for the function, as seen before with `format()`. `sum()` can take option arguments also
 
-```R
+```{r}
 sum(2,2,4,NA)
 ```
 Returns `NA`, but we can tell the function to ignore missing data
-```R
+```{r eval=FALSE}
 sum(2,2,4,NA, na.rm=TRUE)
 ```
 Sometimes functions need these options to be declared. The function `runif()` (random-uniform), is a random number generator. It requires 3 arguments to run.
-```R
+```{r eval=FALSE}
 runif(1,0,10)
 ```
 If we run it without any arguments
-```R
+```{r eval=FALSE}
 runif()
 ```
-We get an error.`argument "n" is missing, with no default`. What does this mean.. every function in R or a package for R has a hlp page and can be accessed by typing `?function` into the console.
-```R
+We get an error.`argument "n" is missing, with no default`. What does this mean? Well, every function in R or a package for R has a help page and can be accessed by typing `?function` into the console (or searched online).
+```{r eval=FALSE}
 ?runif
 ```
-Under __Arguments__ we see that `n` us the number of times the function generate a random number. So if we correct the error and give a value to n.
-```R
+Under __Arguments__ we see that `n` is the number of times the function generate a random number. So if we correct the error and give a value to n.
+```{r eval=FALSE}
 runif(n=2)
 ```
 It runs without error.
 
 But I said it required 3 arguments.. and it does. Most functions are written so that only a single value is needed to be give, the other arguments are given default values. In the help pages these can be seen under __Usage__ where it says 
-```R
+```{r eval=FALSE}
 runif(n, min = 0, max = 1)
 ```
 By default the function samples values between 1 and 0. We can change this by assigning `min` and `max`. You will notice when I first called the function that I did not declare those options explicitly. A function takes the arguments by default in the order that they ar assigned in the __Usage__ so when we call
-```R
+```{r eval=FALSE}
 runif(1,0,10)
 ```
 It knows that we want `n = 1` with `min = 0` and `max = 10`. If we explicitly call the arguments then the order does not matter.
-```R
+```{r eval=FALSE}
 runif(max = 10 , n= 1, min = 0)
 ```
 Best-practice is to always be as explicit as reasonable so that there is no ambiguity in reproducibility.
@@ -167,13 +169,13 @@ Best-practice is to always be as explicit as reasonable so that there is no ambi
 ### Nested Functions
 
 Functions can be called inside of other functions, and will be executed from the inner-most outward. We saw this before
-```R
+```{r eval=FALSE}
 as.numeric(format(1/10000, scientific=FALSE))
 ```
 It formatted the number first, then it made it numeric. Nesting is never necessary, but often very practical, however if not used wisely can lead to some issues.
 
 Another example of nesting
-```R
+```{r}
 sin(sum(2,3,sum(1,NA,4,na.rm=TRUE)))
 ```
 Hopefully, you can see how this can get messy quickly, and very difficult to follow.. and a headache to debug if it does not work correctly. The more familiar you become with R, the easier long nested functions become to read, but if you are collaborating with someone who is not as well-versed it is just easier for everyone to keep it simple. The best way to do that is with the assignment of variables.
@@ -181,11 +183,11 @@ Hopefully, you can see how this can get messy quickly, and very difficult to fol
 # Variables
 
 In R a variable is used to represent a value or an object. Like in algebra (probably not by coincidence) `x` is a favorite variable for R-beginners. Variables can be assigned in two ways
-```R
+```{r}
 x <- 5
 ```
 or
-```R
+```{r eval=FALSE}
 x = 5
 ```
 The use of `<-` used to be the only way to assign variables in R, I do believe it is a remnant of R's S herritage. More recently the use of `=` has been implemented to follow suit with almost every other languages standard syntax. Arguably `<-` is still more favored, either by convention and most people learning from people who have been using that their entire carreer, or simply because it's uniquely R and distinguishes it. They are equivalent, however.
@@ -203,7 +205,7 @@ Naming variables is very important. In very few cases is `x` actually a useful n
 Variable names can't start with a number, underscore, or period.
 
 Sometimes it takes a length variable name to describe what it is representing, it can be cumbersome to type but will help imensely in the scenario when reproducing your code or sharing with someone else.
-```R
+```{r}
 array_1_5 <- array(seq(1,5,1))
 ```
 Is far more informative than `x`.
@@ -214,17 +216,17 @@ It is also important not to assign variable with the same name as a function. Yo
 A variable is not assigned a data-type, it inherits the data-type of its assignment, along with all other properties.
 
 If a variable is assigned as the output of a function it take only that output value. i.e.
-```R
+```{r}
 x <- sum(2,2,4)
 ```
 Does not take the value `sum(2,2,4)`, it takes the value of `8`, here `x == 8`.
 
 We can demonstrate this with a random number generator, `runif`.
-```R
+```{r eval=FALSE}
 runif(1, 0, 10)
 ```
 If we run this several times we are likely to get a different number each time. If we assign it to a variable
-```R
+```{r}
 x <- runif(1, 0, 10)
 ```
 We see that every time we call `x` it has the same value, it is not executing the funtion every time. This can be exploited for dynamic-programming.
@@ -258,44 +260,43 @@ We have also seen assignment operators:
 ### Logical Operators
 Logical operators execute Boolean arguments.
 
-* Logical-not `!`
-```R
+* Logical-not `!` Gives the binary opposite.
+```{r eval=FALSE}
 x <- c(FALSE,TRUE,0,1)
 !x
 ```
-Gives the binary opposite.
-* And `&`
-```R
+
+* And `&` Checks binary values of each element-pair, returns TRUE if both are TRUE.
+```{r eval=FALSE}
 y <- c(FALSE,TRUE,1,0)
 x&y
 ```
-Checks binary values of each element-pair, returns TRUE if both are TRUE.
-* Logical-and `&&`
-```R
+
+* Logical-and `&&` Checks if all elements are TRUE in both objects.
+```{r eval=FALSE}
 x <- c(TRUE,1)
 y <- c(TRUE,0)
-x&y
+x&&y
 y <- c(TRUE,1)
-x&y
+x&&y
 ```
-Checks if all elements are TRUE in both objects.
-* Or `|`
-```R
+
+* Or `|` Checks if each element-pair has at least one TRUE value.
+```{r eval=FALSE}
 y <- c(TRUE,0)
 x|y
 y <- c(TRUE,1)
 x|y
 ```
-Checks if each element-pair has at least one TRUE value.
-* Logical-or `||`
-```R
+
+* Logical-or `||` Checks if either object has at least one TRUE value.
+```{r eval=FALSE}
 x <- c(FALSE,0)
 y <- c(FALSE,0)
 x||y
 y <- c(TRUE,0)
 x||y
 ```
-Checks if either object has at least one TRUE value.
 
 ### Relational Operators
 Relational operators compares two objects with one another.
@@ -309,16 +310,16 @@ Relational operators compares two objects with one another.
 
 ## Using operators together
 Operators have a lot of power individually, and even moreso when used together. As a very basic example we can check:
-```R
+```{r eval=FALSE}
 x <- 2; y = 1
 x < y || x == y
 ```
 It checks both conditions and evaluates if either is TRUE.. which is the same as
-```R
+```{r eval=FALSE}
 x <= y 
 ```
 But it demonstrates the point.
-```R
+```{r eval=FALSE}
 x < y || x == y || x > y #basically, does x exist?
 ```
 
@@ -326,28 +327,29 @@ x < y || x == y || x > y #basically, does x exist?
 R is an open-source program. This means that anyone is allowed to contribute to it, and most commonly this is done in the form of packages. Packages are are essentially a collection of custom functions. The need to install these packages is because sometimes they can be rather large and there are over 12,500 [packages maintained in CRAN][Pack]. To keep R lightweight these packages are installed and opened in each session on-demand, and only base-R is loaded into each session by default.
 
 To demonstrate this, let's call a commonly used function, `melt()`. There is no need to use the function, so I will not explain its use in this tutorial, just try calling it in the console.
-```R
+```{r error=TRUE}
 melt()
 ```
 `Error in melt() : could not find function "melt"` The session has no function assigned to `melt()`. Now let's install the package that defines what `melt()` is.
-```R
+```{r eval=FALSE}
 install.packages('reshape2')
 ```
 When using `install.packages()` the name of the package you want to install must be contained in quotations (R treats single and double-quote the same way). You will notice that R wrote a lot of messages to the console. Mostly this is just transparency in what is going on and typically unimportant unless the last thing it says is `ERROR`.. then something went wrong. If you are positive that the package will install without an error and you don't care for all that stuff printed to your console, there's an option for that!
-```R
+```{r eval=FALSE}
 install.packages('reshape2', quiet = TRUE)
 ```
 Once the package is installed we then need to load it into our session, which is done with
-```R
+```{r}
 library(reshape2)
 ```
 Notice quotations are not needed to use `library`, however it will work with or without them.
 
 Now lets try to call our function again.
-```R
+```{r error=TRUE}
 melt()
 ```
 We have a new error! Now it is saying we didn't supply the correct arguments to the function, so the new function from our package is loaded into our session! Packages make R super powerful because it's a great way to share code, and one of the primary rules of coding is to 'never write something that's already been written'. I don't know for sure if that is actually a something that's taught.. but I think it's a good philosophy.
 
 [Pack]:https://cran.r-project.org/web/packages/available_packages_by_name.html
+
 

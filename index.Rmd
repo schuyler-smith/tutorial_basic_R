@@ -3,7 +3,7 @@ title: "Tutorial: R Basic"
 ---
 **Downloads**: [R][R] and [RStudio][RS]
 
-## Why R?
+# Why R?
 
 [What is R?][Rwhat]
 
@@ -11,7 +11,7 @@ Essentially, R is a language that was made to handle complex statistics, working
 
 [Rwhat]:https://www.r-project.org/about.html
 
-#### But I always hear about how great Python is.
+### But I always hear about how great Python is.
 
 Yes, [Python][Py] is a beautiful language that strikes an amazing balance between syntax and power. With the frequent release of new packages for both R and Python the overlap in function is becoming greater. However, for now R still has the upper-hand when it comes to math, statistics, and graphs.
 
@@ -23,7 +23,7 @@ There is a lot of truth to this. My recommendation is to find which is most usef
 
 [Py]:https://www.python.org/
 
-# Inital Setup #
+# Inital Setup
 
 To work through this tutorial you will need to download and install the latest version of [R][R] from the [CRAN][R] website.
 
@@ -34,11 +34,11 @@ And now we are ready to get started!
 [R]:https://mirror.las.iastate.edu/CRAN/
 [RS]:https://www.rstudio.com/products/rstudio/download/#download
 
-## Exercise 1
+# Exercise 1
 
 **Getting started** - Opening R and familiarizing with the basics of how it works.
 
-## Questions
+# Questions
 
 If you have any questions, feel free to contact me by e-mail at <sdsmith@iastate.edu>
 

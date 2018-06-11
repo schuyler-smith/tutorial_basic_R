@@ -47,6 +47,19 @@ Opening R and familiarizing with the basics of how it works.
 
 # [Exercise 2 - Data-Structures][Ex2]
 
+  + [**Data Types (atomic classes)**](exercise_2.html#data_types_(atomic_classes))
+  + [**Numeric Data**](exercise_2.html#numeric_data)
+  + [**Character Data**](exercise_2.html#character_data)
+  + [**Logical Data**](exercise_2.html#logical_data)
+  + [**Vector**](exercise_2.html#vector)
+  + [**List**](exercise_2.html#list)
+  + [**Matrix**](exercise_2.html#matrix)
+  + [**Data Frame**](exercise_2.html#data_frame)
+  + [**Table**](exercise_2.html#table)
+  + [**Tidyverse**](exercise_2.html#tidyverse)
+  + [**Object**](exercise_2.html#object)
+  + [**Class**](exercise_2.html#class)
+
 # [Exercise 3 - Writing Scripts][Ex3]
 
 # [Exercise 4 - Processing Our Data][Ex4]

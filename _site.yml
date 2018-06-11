@@ -1,4 +1,5 @@
 name: "Tutorial: Basic R"
+output_dir: "."
 navbar:
   title: "Tutorial: Basic R"
   type: inverse

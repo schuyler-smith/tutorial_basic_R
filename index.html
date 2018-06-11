@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Tutorial: R Basic</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Tutorial: Basic R</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Tutorial Overview</a>
+</li>
+<li>
+  <a href="exercise_1.html">Exercise 1: Getting Started</a>
+</li>
+<li>
+  <a href="exercise_2.html">Exercise 2: </a>
+</li>
+<li>
+  <a href="exercise_3.html">Exercise 3: </a>
+</li>
+<li>
+  <a href="exercise_4.html">Exercise 4: </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Tutorial: R Basic</h1>
+
+</div>
+
+
+<p><strong>Downloads</strong>: <a href="https://mirror.las.iastate.edu/CRAN/">R</a> and <a href="https://www.rstudio.com/products/rstudio/download/#download">RStudio</a></p>
+<div id="why-r" class="section level2">
+<h2>Why R?</h2>
+<p><a href="https://www.r-project.org/about.html">What is R?</a></p>
+<p>Essentially, R is a language that was made to handle complex statistics, working with numerical matrices and data-frames. The strength of R over other languages lies in its statistics, linear algebra, and especially ability to make graphs and figures from data.</p>
+<div id="but-i-always-hear-about-how-great-python-is." class="section level4">
+<h4>But I always hear about how great Python is.</h4>
+<p>Yes, <a href="https://www.python.org/">Python</a> is a beautiful language that strikes an amazing balance between syntax and power. With the frequent release of new packages for both R and Python the overlap in function is becoming greater. However, for now R still has the upper-hand when it comes to math, statistics, and graphs.</p>
+<blockquote>
+<p>I fear not the man who has practiced 10,000 kicks once, but I fear the man who has practiced one kick 10,000 times.</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>Bruce Lee</li>
+</ul>
+</blockquote>
+<p>There is a lot of truth to this. My recommendation is to find which is most useful and spend time mastering that one. For a lot of scientists, this tends to be R. But there is certainly a lot of use in being familiar and comfortable with multiple languages.</p>
+</div>
+</div>
+<div id="inital-setup" class="section level1">
+<h1>Inital Setup</h1>
+<p>To work through this tutorial you will need to download and install the latest version of <a href="https://mirror.las.iastate.edu/CRAN/">R</a> from the <a href="https://mirror.las.iastate.edu/CRAN/">CRAN</a> website.</p>
+<p>Additionally, but not necessary, <a href="https://www.rstudio.com/products/rstudio/download/#download">RStudio</a> is a nice program that runs R and makes many things easier for users, particularly saving and opening files and figures.</p>
+<p>And now we are ready to get started!</p>
+<div id="exercise-1" class="section level2">
+<h2>Exercise 1</h2>
+<p><strong>Getting started</strong> - Opening R and familiarizing with the basics of how it works.</p>
+</div>
+<div id="questions" class="section level2">
+<h2>Questions</h2>
+<p>If you have any questions, feel free to contact me by e-mail at <a href="mailto:sdsmith@iastate.edu">sdsmith@iastate.edu</a></p>
+<p><strong>Disclaimer:</strong> There are peple far, far more knowledgeable about R and how it works than myself. There are very few questions that I have had that I could not find the answer to explained by an expert on <a href="https://stackoverflow.com/">stackoverflow</a> or similar sites.</p>
+</div>
+</div>
+
+
+<p>Schuyler Smith</p> 
+<p>Ph.D. Student - Bioinformatics and Computational Biology</p>
+<p>Iowa State University of Science and Technology.  Ames, IA.</p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

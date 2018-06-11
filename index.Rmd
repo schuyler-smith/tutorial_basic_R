@@ -11,7 +11,7 @@ Essentially, R is a language that was made to handle complex statistics, working
 
 [Rwhat]:https://www.r-project.org/about.html
 
-### But I always hear about how great Python is.
+#### But I always hear about how great Python is.
 
 Yes, [Python][Py] is a beautiful language that strikes an amazing balance between syntax and power. With the frequent release of new packages for both R and Python the overlap in function is becoming greater. However, for now R still has the upper-hand when it comes to math, statistics, and graphs.
 
@@ -48,7 +48,7 @@ Opening R and familiarizing with the basics of how it works.
 
 # [Exercise 3 - Writing Scripts][Ex3]
 
-# [Exercise 4 - rocessing Our Data][Ex4]
+# [Exercise 4 - Processing Our Data][Ex4]
 
 
 [Ex1]:exercise_1.html

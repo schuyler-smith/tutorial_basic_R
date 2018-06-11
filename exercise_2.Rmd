@@ -1,5 +1,85 @@
 ---
 title: "Exercise 2: Data-Structures"
 ---
+<br>
 
-# Data Types
+# Data Types (atomic classes)
+
+Data is stored in memory in a variety of ways. Each type of data has different properties and different memory allocations. For the vast majority of users who are not optimizing algorithms this is not a major concern. The main concern with data types is knowing how they work and how R handles them. Understanding of data types and structures will save a lot of headaches down the road, as R does not have any intuitive data type handling, only explicit. 
+
+At the smallest level there are three data types (technically there are five, but if you know you need one of the other two then you don't need me to explain them to you).
+
+## Numeric Data
+
+Numeric data is fairly easy to understand, it's composed of numbers. In R, all numeric data is the same. In some languages you will see terms such as int, float, and double. If those terms mean something to you, R natively only works with int and double data types. If those don't mean anything to you, do not worry, it's generally unimportant to front-end users.
+
+Numeric data can have mathmatical operations performed on them.
+
+```{r}
+10-5
+```
+
+## Character Data
+
+Character data in R is comprised of what is refered to as characters and strings. Strings are just a series of characters, and characters are any symbol (most commonlty letters and numbers). Character data cannot have mathmatical operations performed on it. This can be confusing because R will often convert data types without making it obvious. We saw this in exercise 1 when converting [scientific notation](exercise_1.html#scientific_notation) unsing `format()`.
+
+```{r}
+(1/10000)*2
+```
+
+```{r error=TRUE}
+format(1/10000, scientific=FALSE)*2
+```
+
+Even though the character data is composed entirely of what we know as numbers, R does not see it that way. The reason is a bit compicated, but the good news is is that we can tell R what the data type should be.
+
+```{r error=TRUE}
+as.numeric(format(1/10000, scientific=FALSE))*2
+```
+
+R is smart enough to know that these are numbers and can be converted and treated as numeric data, if we explicitly tell it to.
+
+Try it with letters.
+
+```{r eval=FALSE}
+as.numeric("a")
+```
+
+## Logical Data
+
+A third type. We saw reference to logical types when we looked at [operators](exercise_1.html#logical_operators). Logical data is a single bit of information, `TRUE` or `FALSE`. It is binary, and you may have noticed that it is stored and treated as such when we were practicing with the operators in exercise 1. Logical data is a comparison of two objects in R.
+
+<br>
+
+# Vector 
+
+<br>
+
+# List 
+
+<br>
+
+# Matrix 
+
+<br>
+
+# Data Frame 
+
+<br>
+
+# Table 
+
+<br>
+
+# Tidyverse 
+
+<br>
+
+# Class 
+
+
+
+<br><br><br>
+<strong>Continue: [Exercise 3: Writing Scripts][Ex3]</strong>
+
+[Ex3]:exercise_3.html

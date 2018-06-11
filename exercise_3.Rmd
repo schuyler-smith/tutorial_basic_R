@@ -1,5 +1,11 @@
 ---
 title: "Exercise 3: Writing Scripts"
 ---
+<br>
 
 # R Files
+
+<br><br><br>
+<strong>Continue: [Exercise 4: Processing Our Data][Ex4]</strong>
+
+[Ex4]:exercise_4.html

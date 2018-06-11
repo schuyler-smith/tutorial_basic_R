@@ -186,7 +186,7 @@ $(document).ready(function ()  {
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
     };
-    options.showAndHide = true;
+    options.showAndHide = false;
     options.smoothScroll = true;
 
     // tocify
@@ -249,6 +249,12 @@ div.tocify {
   border-radius: 0px;
 }
 
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
 
 </style>
 
@@ -308,8 +314,65 @@ div.tocify {
 </div>
 
 
-<div id="data-types" class="section level1">
-<h1>Data Types</h1>
+<p><br></p>
+<div id="data-types-atomic-classes" class="section level1">
+<h1>Data Types (atomic classes)</h1>
+<p>Data is stored in memory in a variety of ways. Each type of data has different properties and different memory allocations. For the vast majority of users who are not optimizing algorithms this is not a major concern. The main concern with data types is knowing how they work and how R handles them. Understanding of data types and structures will save a lot of headaches down the road, as R does not have any intuitive data type handling, only explicit.</p>
+<p>At the smallest level there are three data types (technically there are five, but if you know you need one of the other two then you don’t need me to explain them to you).</p>
+<div id="numeric-data" class="section level2">
+<h2>Numeric Data</h2>
+<p>Numeric data is fairly easy to understand, it’s composed of numbers. In R, all numeric data is the same. In some languages you will see terms such as int, float, and double. If those terms mean something to you, R natively only works with int and double data types. If those don’t mean anything to you, do not worry, it’s generally unimportant to front-end users.</p>
+<p>Numeric data can have mathmatical operations performed on them.</p>
+<pre class="r"><code>10-5</code></pre>
+<pre><code>## [1] 5</code></pre>
+</div>
+<div id="character-data" class="section level2">
+<h2>Character Data</h2>
+<p>Character data in R is comprised of what is refered to as characters and strings. Strings are just a series of characters, and characters are any symbol (most commonlty letters and numbers). Character data cannot have mathmatical operations performed on it. This can be confusing because R will often convert data types without making it obvious. We saw this in exercise 1 when converting <a href="exercise_1.html#scientific_notation">scientific notation</a> unsing <code>format()</code>.</p>
+<pre class="r"><code>(1/10000)*2</code></pre>
+<pre><code>## [1] 2e-04</code></pre>
+<pre class="r"><code>format(1/10000, scientific=FALSE)*2</code></pre>
+<pre><code>## Error in format(1/10000, scientific = FALSE) * 2: non-numeric argument to binary operator</code></pre>
+<p>Even though the character data is composed entirely of what we know as numbers, R does not see it that way. The reason is a bit compicated, but the good news is is that we can tell R what the data type should be.</p>
+<pre class="r"><code>as.numeric(format(1/10000, scientific=FALSE))*2</code></pre>
+<pre><code>## [1] 2e-04</code></pre>
+<p>R is smart enough to know that these are numbers and can be converted and treated as numeric data, if we explicitly tell it to.</p>
+<p>Try it with letters.</p>
+<pre class="r"><code>as.numeric(&quot;a&quot;)</code></pre>
+</div>
+<div id="logical-data" class="section level2">
+<h2>Logical Data</h2>
+<p>A third type. We saw reference to logical types when we looked at <a href="exercise_1.html#logical_operators">operators</a>. Logical data is a single bit of information</p>
+<p><br></p>
+</div>
+</div>
+<div id="vector" class="section level1">
+<h1>Vector</h1>
+<p><br></p>
+</div>
+<div id="list" class="section level1">
+<h1>List</h1>
+<p><br></p>
+</div>
+<div id="matrix" class="section level1">
+<h1>Matrix</h1>
+<p><br></p>
+</div>
+<div id="data-frame" class="section level1">
+<h1>Data Frame</h1>
+<p><br></p>
+</div>
+<div id="table" class="section level1">
+<h1>Table</h1>
+<p><br></p>
+</div>
+<div id="tidyverse" class="section level1">
+<h1>Tidyverse</h1>
+<p><br></p>
+</div>
+<div id="class" class="section level1">
+<h1>Class</h1>
+<p><br><br><br> <strong>Continue: <a href="exercise_3.html">Exercise 3: Writing Scripts</a></strong></p>
 </div>
 
 

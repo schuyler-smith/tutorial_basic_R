@@ -24,4 +24,5 @@ output:
     css: styles.css
     toc: true
     toc_float: 
+      collapsed: false
       smooth_scroll: true

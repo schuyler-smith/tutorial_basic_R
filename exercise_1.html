@@ -186,7 +186,7 @@ $(document).ready(function ()  {
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
     };
-    options.showAndHide = true;
+    options.showAndHide = false;
     options.smoothScroll = true;
 
     // tocify
@@ -249,6 +249,12 @@ div.tocify {
   border-radius: 0px;
 }
 
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
 
 </style>
 
@@ -308,6 +314,7 @@ div.tocify {
 </div>
 
 
+<p><br></p>
 <div id="first-time-in-r" class="section level1">
 <h1>First Time In R</h1>
 <p>When we first open R, we see a console. We can type into this console and use it as a calculator. Try.</p>
@@ -329,7 +336,8 @@ div.tocify {
 ## 1: 2 - 3 2
 ##           ^</code></pre>
 <p>Error: unexpected numeric constant in “2 - 3 2”</p>
-<p>Often errors in R (and most scripting/programming languages} are not easily interpreted by beginners. This one is fairly simple, “unexpected numeric constant” is referring to the second 2. R reads the line from left to right and after the 3 there is no operation to tell R how to handle the second 2, so it errors.</p>
+<p>Often errors in R (and most scripting/programming languages} are not easily interpreted by beginners. This one is fairly simple, “unexpected numeric constant” is referring to the second 2. R reads the line from left to right and after the 3 there is no operation to tell R how to handle the second 2, so it errors.<br />
+<br></p>
 </div>
 <div id="whitespace" class="section level1">
 <h1>Whitespace</h1>
@@ -349,6 +357,7 @@ div.tocify {
 <p>Alternatively, if you give an operation and don’t follow it up with an argument then R will wait for you to complete it:</p>
 <pre class="r"><code>2 - </code></pre>
 <p>If you don’t want to type out the remaining part and just want to complete the line in your script and rerun it you can hit the escape ‘Esc’ button to cancel the command. Escape is the universal ‘STOP’ button in R.</p>
+<p><br></p>
 </div>
 <div id="order-of-operations" class="section level1">
 <h1>Order of Operations</h1>
@@ -365,6 +374,7 @@ div.tocify {
 <p>Is evaluate differently than</p>
 <pre class="r"><code>(2 + 2)^3</code></pre>
 <p>Using parentheses can be good practice for ensuring correct order of operations and also making long equations easier to read.</p>
+<p><br></p>
 </div>
 <div id="scientific-notation" class="section level1">
 <h1>Scientific Notation</h1>
@@ -384,6 +394,7 @@ div.tocify {
 <p>Note that this function does not return the number as a numeric (you can tell this because the output is contained in quotation marks) and R does not have intuitive data-type handling, but it can be told how to.</p>
 <pre class="r"><code>as.numeric(format(1/10000, scientific=FALSE))</code></pre>
 <pre><code>## [1] 1e-04</code></pre>
+<p><br></p>
 </div>
 <div id="functions" class="section level1">
 <h1>Functions</h1>
@@ -426,6 +437,7 @@ div.tocify {
 <pre class="r"><code>sin(sum(2,3,sum(1,NA,4,na.rm=TRUE)))</code></pre>
 <pre><code>## [1] -0.5440211</code></pre>
 <p>Hopefully, you can see how this can get messy quickly, and very difficult to follow.. and a headache to debug if it does not work correctly. The more familiar you become with R, the easier long nested functions become to read, but if you are collaborating with someone who is not as well-versed it is just easier for everyone to keep it simple. The best way to do that is with the assignment of variables.</p>
+<p><br></p>
 </div>
 </div>
 <div id="variables" class="section level1">
@@ -461,6 +473,7 @@ div.tocify {
 <p>If we run this several times we are likely to get a different number each time. If we assign it to a variable</p>
 <pre class="r"><code>x &lt;- runif(1, 0, 10)</code></pre>
 <p>We see that every time we call <code>x</code> it has the same value, it is not executing the funtion every time. This can be exploited for dynamic-programming.</p>
+<p><br></p>
 </div>
 </div>
 </div>
@@ -552,6 +565,7 @@ x &lt; y || x == y</code></pre>
 <pre class="r"><code>x &lt;= y </code></pre>
 <p>But it demonstrates the point.</p>
 <pre class="r"><code>x &lt; y || x == y || x &gt; y #basically, does x exist?</code></pre>
+<p><br></p>
 </div>
 </div>
 <div id="packages" class="section level1">
@@ -571,7 +585,7 @@ x &lt; y || x == y</code></pre>
 <pre class="r"><code>melt()</code></pre>
 <pre><code>## Error in melt(): argument &quot;data&quot; is missing, with no default</code></pre>
 <p>We have a new error! Now it is saying we didn’t supply the correct arguments to the function, so the new function from our package is loaded into our session! Every time you restart R, the packages you wish to use need to be <code>library()</code>ed.</p>
-<p>Packages make R super powerful because it’s a great way to share code, and one of the primary rules of coding is to ‘never write something that’s already been written’. I don’t know for sure if that is actually a something that’s taught.. but I think it’s a good philosophy.</p>
+<p>Packages make R super powerful because it’s a great way to share code, and one of the primary rules of coding is to ‘never write something that’s already been written’. I don’t know for sure if that is actually a something that’s taught.. but I think it’s a good philosophy. <br><br><br> <strong>Continue: <a href="exercise_2.html">Exercise 2: Data-Structures</a></strong></p>
 </div>
 
 

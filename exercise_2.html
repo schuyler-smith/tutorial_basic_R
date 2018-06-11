@@ -319,15 +319,15 @@ div.tocify {
 <h1>Data Types (atomic classes)</h1>
 <p>Data is stored in memory in a variety of ways. Each type of data has different properties and different memory allocations. For the vast majority of users who are not optimizing algorithms this is not a major concern. The main concern with data types is knowing how they work and how R handles them. Understanding of data types and structures will save a lot of headaches down the road, as R does not have any intuitive data type handling, only explicit.</p>
 <p>At the smallest level there are three data types (technically there are five, but if you know you need one of the other two then you don’t need me to explain them to you).</p>
-<div id="numeric-data" class="section level2">
-<h2>Numeric Data</h2>
+<div id="numeric-data" class="section level3">
+<h3>Numeric Data</h3>
 <p>Numeric data is fairly easy to understand, it’s composed of numbers. In R, all numeric data is the same. In some languages you will see terms such as int, float, and double. If those terms mean something to you, R natively only works with int and double data types. If those don’t mean anything to you, do not worry, it’s generally unimportant to front-end users.</p>
 <p>Numeric data can have mathmatical operations performed on them.</p>
 <pre class="r"><code>10-5</code></pre>
 <pre><code>## [1] 5</code></pre>
 </div>
-<div id="character-data" class="section level2">
-<h2>Character Data</h2>
+<div id="character-data" class="section level3">
+<h3>Character Data</h3>
 <p>Character data in R is comprised of what is refered to as characters and strings. Strings are just a series of characters, and characters are any symbol (most commonlty letters and numbers). Character data cannot have mathmatical operations performed on it. This can be confusing because R will often convert data types without making it obvious. We saw this in exercise 1 when converting <a href="exercise_1.html#scientific_notation">scientific notation</a> unsing <code>format()</code>.</p>
 <pre class="r"><code>(1/10000)*2</code></pre>
 <pre><code>## [1] 2e-04</code></pre>
@@ -340,18 +340,87 @@ div.tocify {
 <p>Try it with letters.</p>
 <pre class="r"><code>as.numeric(&quot;a&quot;)</code></pre>
 </div>
-<div id="logical-data" class="section level2">
-<h2>Logical Data</h2>
-<p>A third type. We saw reference to logical types when we looked at <a href="exercise_1.html#logical_operators">operators</a>. Logical data is a single bit of information</p>
+<div id="logical-data" class="section level3">
+<h3>Logical Data</h3>
+<p>A third type. We saw reference to logical types when we looked at <a href="exercise_1.html#logical_operators">operators</a>. Logical data is a single bit of information, <code>TRUE</code> or <code>FALSE</code>. It is binary, and you may have noticed that it is stored and treated as such when we were practicing with the operators in exercise 1. Logical data is a comparison of two objects in R.</p>
 <p><br></p>
 </div>
 </div>
 <div id="vector" class="section level1">
 <h1>Vector</h1>
+<p>Vectors are the most common data structure and the most important for using R. A vector is a series of data contained in a single object. Here we will use the concatenate function <code>c()</code> to create a vector.</p>
+<pre class="r"><code>our_vector &lt;- c(&quot;a&quot;, 0, TRUE)</code></pre>
+<p>Vectors are atomic, they can only hold a series of data that is all of the same type. Notice though that when I created <code>our_vector</code> I created it with one of each atomic data type. So what happened? Call <code>our_vector</code> by typing it into the console.</p>
+<pre class="r"><code>our_vector</code></pre>
+<p>It converted all of the elements of <code>our_vector</code> to characters. Well, that was nice of it, but what if I wanted it to be numeric, we can tell R to make something a different data type, right?</p>
+<pre class="r"><code>as.logical(our_vector)</code></pre>
+<p>It does it.. but we can’t fool it. It sets all non-logical data to <code>NA</code>.</p>
+<p>If we aren’t sure what atomic type our vector is there are several ways to ask R.</p>
+<pre class="r"><code>typeof(our_vector)
+class(our_vector)</code></pre>
+<p>And the most common and most informative is to ask the structure <code>str</code>.</p>
+<pre class="r"><code>str(our_vector)</code></pre>
+<div id="accessing-elements-of-a-vector" class="section level3">
+<h3>Accessing Elements of a Vector</h3>
+<p>Each element of a vector is still an individual object, and is assigned what is called and index value so that R knows where it is and you can explicitly call it. Say that we had a numeric vector</p>
+<pre class="r"><code>our_vector &lt;- c(1, 0, 3)</code></pre>
+<p>The index values in R are assigned in increasing numerical value starting at position <code>1</code> based on order of appearance. We can call them by typing the name of the vector and then the index value contained in <code>[]</code>.</p>
+<pre class="r"><code>our_vector[1]
+our_vector[2]
+our_vector[3]</code></pre>
+<p>For vectors, if we call an index that is not in the object R will assign it as <code>NA</code>.</p>
+<pre class="r"><code>our_vector[4]</code></pre>
+<p>This is nice because it does not error and also because it allows us to add to our vector by index. So let’s assign a value to the 4th position in <code>our_vector</code>.</p>
+<pre class="r"><code>our_vector[4] &lt;- 5</code></pre>
+<p>Notice that <code>our_vector</code> now has <code>5</code> at the 4th index. You can always call <code>length()</code> on a vector to find the total number of elements it contains.</p>
+<p>What if we skip an index?</p>
+<pre class="r"><code>our_vector[6] &lt;- 3</code></pre>
+<p>R does what we ask it to, and increases the size of the vector to index up to that position with the unassigned positions set to <code>NA</code>. We can change the value of positions too using the assignment operator.</p>
+<pre class="r"><code>our_vector[1] &lt;- 138</code></pre>
+<p>if we want to know something about the relation of multiple indices we can call them all individually.</p>
+<pre class="r"><code>our_vector[1]/our_vector[3]
+our_vector[1]/our_vector[3] &gt;= our_vector[4]</code></pre>
+<p>Or we can call a range of indices.</p>
+<pre class="r"><code>sum(our_vector[1:3])</code></pre>
+<p>Or a vector of vectors!</p>
+<pre class="r"><code>sum(our_vector[c(1,3,4)])</code></pre>
+<p>When operations are called on a whole vector it will perform that operation on each element individually.</p>
+<pre class="r"><code>our_vector/3</code></pre>
+<p>This is super powerful! But sometimes it doesn’t workout.</p>
+<pre class="r"><code>sum(our_vector)</code></pre>
+<p>It worked.. but that’s not really what we wanted.</p>
+<p>Fortunately there are lots of ways to handle almost every issue in R. The easiest here would be the system built into the function</p>
+<pre class="r"><code>sum(our_vector, na.rm=TRUE)</code></pre>
+<p>But in this section of the tutorial, that’s cheating!</p>
+</div>
+<div id="excluding-elements-of-a-vector" class="section level3">
+<h3>Excluding Elements of a Vector</h3>
+<p>The same way we call specific elements, we can ignore ones too by specifying minus that elements <code>-</code>.</p>
+<pre class="r"><code>our_vector[-5]
+sum(our_vector[-5])</code></pre>
+<p>But what if we have a really large dataset stored as a vector and there are lots of <code>NA</code> values? There’s lots of ways to handle that too.</p>
+<p>First, find out which values are <code>NA</code> using logical operators. <code>NA</code> is a special case, since it is an absences of data it has no value or type, so using <code>==</code> does not work as it would in every other case, so R has a function specifically for it <code>is.na()</code></p>
+<pre class="r"><code>is.na(our_vector)</code></pre>
+<p>or which are <code>!</code> not <code>NA</code>.</p>
+<pre class="r"><code>!is.na(our_vector)</code></pre>
+<p>If we just wanted to know which indices are equal to 3 we could use <code>==</code>.</p>
+<pre class="r"><code>our_vector == 3</code></pre>
+<p>Now, we can access those specific elements of the vector using the logical values.</p>
+<pre class="r"><code>sum(our_vector[!is.na(our_vector)])</code></pre>
+<p>This can look intimidating if you are not comfortable in R, so as we talked about in exercise 1 when talking about <a href="exercise_1.html#nested_functions">nested functions</a>, assigning variables can make things cleaner.</p>
+<pre class="r"><code>not_na &lt;- !is.na(our_vector)
+our_vector_no_na &lt;- our_vector[not_na]
+sum(our_vector_no_na)</code></pre>
 <p><br></p>
+<p>What if we really wanted to have multiple data types in the same object, this is where a list is handy.</p>
+<p><br></p>
+</div>
 </div>
 <div id="list" class="section level1">
 <h1>List</h1>
+<p>A list is exactly that. It’s similar to a vector, it contains other objects, but in their own partition so that they can each have their own data type.</p>
+<pre class="r"><code>our_list &lt;- list(&quot;a&quot;, 0, TRUE)</code></pre>
+<p>If you call <code>our_list</code> you will see that it looks different than the vector but also each element is not forced to be a character.</p>
 <p><br></p>
 </div>
 <div id="matrix" class="section level1">
@@ -368,6 +437,10 @@ div.tocify {
 </div>
 <div id="tidyverse" class="section level1">
 <h1>Tidyverse</h1>
+<p><br></p>
+</div>
+<div id="object" class="section level1">
+<h1>Object</h1>
 <p><br></p>
 </div>
 <div id="class" class="section level1">

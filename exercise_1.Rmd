@@ -43,6 +43,10 @@ Often errors in R (and most scripting/programming languages} are not easily inte
 
 # Objects
 
+Everything in R is an object.
+
+You may have heard the term "object-oriented programming". That's what R does, explicitly. An object is a representation of the information stored in the computer's memory. Everything you store in R takes memory, this can become a limit to the ability of R, and we will touch on that as we progress through the tutorial.
+
 <br>
 
 # Whitespace

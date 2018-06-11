@@ -9,20 +9,18 @@ Data is stored in memory in a variety of ways. Each type of data has different p
 
 At the smallest level there are three data types (technically there are five, but if you know you need one of the other two then you don't need me to explain them to you).
 
-## Numeric Data
+### Numeric Data
 
 Numeric data is fairly easy to understand, it's composed of numbers. In R, all numeric data is the same. In some languages you will see terms such as int, float, and double. If those terms mean something to you, R natively only works with int and double data types. If those don't mean anything to you, do not worry, it's generally unimportant to front-end users.
 
 Numeric data can have mathmatical operations performed on them.
-
 ```{r}
 10-5
 ```
 
-## Character Data
+### Character Data
 
 Character data in R is comprised of what is refered to as characters and strings. Strings are just a series of characters, and characters are any symbol (most commonlty letters and numbers). Character data cannot have mathmatical operations performed on it. This can be confusing because R will often convert data types without making it obvious. We saw this in exercise 1 when converting [scientific notation](exercise_1.html#scientific_notation) unsing `format()`.
-
 ```{r}
 (1/10000)*2
 ```
@@ -30,22 +28,18 @@ Character data in R is comprised of what is refered to as characters and strings
 ```{r error=TRUE}
 format(1/10000, scientific=FALSE)*2
 ```
-
 Even though the character data is composed entirely of what we know as numbers, R does not see it that way. The reason is a bit compicated, but the good news is is that we can tell R what the data type should be.
-
 ```{r error=TRUE}
 as.numeric(format(1/10000, scientific=FALSE))*2
 ```
-
 R is smart enough to know that these are numbers and can be converted and treated as numeric data, if we explicitly tell it to.
 
 Try it with letters.
-
 ```{r eval=FALSE}
 as.numeric("a")
 ```
 
-## Logical Data
+### Logical Data
 
 A third type. We saw reference to logical types when we looked at [operators](exercise_1.html#logical_operators). Logical data is a single bit of information, `TRUE` or `FALSE`. It is binary, and you may have noticed that it is stored and treated as such when we were practicing with the operators in exercise 1. Logical data is a comparison of two objects in R.
 
@@ -53,9 +47,134 @@ A third type. We saw reference to logical types when we looked at [operators](ex
 
 # Vector 
 
+Vectors are the most common data structure and the most important for using R. A vector is a series of data contained in a single object. Here we will use the concatenate function `c()` to create a vector.
+```{r}
+our_vector <- c("a", 0, TRUE)
+```
+Vectors are atomic, they can only hold a series of data that is all of the same type. Notice though that when I created `our_vector` I created it with one of each atomic data type. So what happened? Call `our_vector` by typing it into the console.
+```{r eval=FALSE}
+our_vector
+```
+It converted all of the elements of `our_vector` to characters. Well, that was nice of it, but what if I wanted it to be numeric, we can tell R to make something a different data type, right?
+```{r eval=FALSE}
+as.logical(our_vector)
+```
+It does it.. but we can't fool it. It sets all non-logical data to `NA`.
+
+If we aren't sure what atomic type our vector is there are several ways to ask R.
+```{r eval=FALSE}
+typeof(our_vector)
+class(our_vector)
+```
+And the most common and most informative is to ask the structure `str`.
+```{r eval=FALSE}
+str(our_vector)
+```
+
+### Accessing Elements of a Vector
+
+Each element of a vector is still an individual object, and is assigned what is called and index value so that R knows where it is and you can explicitly call it. Say that we had a numeric vector
+```{r}
+our_vector <- c(1, 0, 3)
+```
+The index values in R are assigned in increasing numerical value starting at position `1` based on order of appearance. We can call them by typing the name of the vector and then the index value contained in `[]`.
+```{r eval=FALSE}
+our_vector[1]
+our_vector[2]
+our_vector[3]
+```
+For vectors, if we call an index that is not in the object R will assign it as `NA`. 
+```{r eval=FALSE}
+our_vector[4]
+```
+This is nice because it does not error and also because it allows us to add to our vector by index. So let's assign a value to the 4th position in `our_vector`.
+```{r}
+our_vector[4] <- 5
+```
+Notice that `our_vector` now has `5` at the 4th index. You can always call `length()` on a vector to find the total number of elements it contains.
+
+What if we skip an index?
+```{r}
+our_vector[6] <- 3
+```
+R does what we ask it to, and increases the size of the vector to index up to that position with the unassigned positions set to `NA`. We can change the value of positions too using the assignment operator.
+```{r}
+our_vector[1] <- 138
+```
+if we want to know something about the relation of multiple indices we can call them all individually.
+```{r results='hide'}
+our_vector[1]/our_vector[3]
+our_vector[1]/our_vector[3] >= our_vector[4]
+```
+Or we can call a range of indices.
+```{r results='hide'}
+sum(our_vector[1:3])
+```
+Or a vector of vectors!
+```{r results='hide'}
+sum(our_vector[c(1,3,4)])
+```
+When operations are called on a whole vector it will perform that operation on each element individually.
+```{r results='hide'}
+our_vector/3
+```
+This is super powerful! But sometimes it doesn't workout.
+```{r results='hide'}
+sum(our_vector)
+```
+It worked.. but that's not really what we wanted.
+
+Fortunately there are lots of ways to handle almost every issue in R. The easiest here would be the system built into the function
+```{r results='hide'}
+sum(our_vector, na.rm=TRUE)
+```
+But in this section of the tutorial, that's cheating!
+
+### Excluding Elements of a Vector
+
+The same way we call specific elements, we can ignore ones too by specifying minus that elements `-`.
+```{r results='hide'}
+our_vector[-5]
+sum(our_vector[-5])
+```
+But what if we have a really large dataset stored as a vector and there are lots of `NA` values? There's lots of ways to handle that too.
+
+First, find out which values are `NA` using logical operators. `NA` is a special case, since it is an absences of data it has no value or type, so using `==` does not work as it would in every other case, so R has a function specifically for it `is.na()`
+```{r results='hide'}
+is.na(our_vector)
+```
+or which are `!` not `NA`.
+```{r results='hide'}
+!is.na(our_vector)
+```
+If we just wanted to know which indices are equal to 3 we could use `==`.
+```{r results='hide'}
+our_vector == 3
+```
+Now, we can access those specific elements of the vector using the logical values.
+```{r results='hide'}
+sum(our_vector[!is.na(our_vector)])
+```
+This can look intimidating if you are not comfortable in R, so as we talked about in exercise 1 when talking about [nested functions](exercise_1.html#nested_functions), assigning variables can make things cleaner.
+```{r results='hide'}
+not_na <- !is.na(our_vector)
+our_vector_no_na <- our_vector[not_na]
+sum(our_vector_no_na)
+```
+
+<br>
+
+What if we really wanted to have multiple data types in the same object, this is where a list is handy.
+
 <br>
 
 # List 
+
+A list is exactly that. It's similar to a vector, it contains other objects, but in their own partition so that they can each have their own data type. 
+```{r}
+our_list <- list("a", 0, TRUE)
+```
+If you call `our_list` you will see that it looks different than the vector but also each element is not forced to be a character. 
 
 <br>
 
@@ -72,6 +191,10 @@ A third type. We saw reference to logical types when we looked at [operators](ex
 <br>
 
 # Tidyverse 
+
+<br>
+
+# Object
 
 <br>
 

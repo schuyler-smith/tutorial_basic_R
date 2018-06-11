@@ -36,6 +36,7 @@ And now we are ready to get started!
 Opening R and familiarizing with the basics of how it works.
 
   + [**First Time In R**](exercise_1.html#first_time_in_r)
+  + [**Objects**](exercise_1.html#objects)
   + [**Whitespace**](exercise_1.html#whitespace)
   + [**Order of Operations**](exercise_1.html#order_of_operations)
   + [**Scientific Notation**](exercise_1.html#scientific_notation)

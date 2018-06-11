@@ -17,7 +17,7 @@ Yes, [Python][Py] is a beautiful language that strikes an amazing balance betwee
 
 > I fear not the man who has practiced 10,000 kicks once, but I fear the man who has practiced one kick 10,000 times. - Bruce Lee
 
-There is a lot of truth to this. My recommendation is to find which is most useful and spend time mastering that one. For a lot of scientists, this tends to be R. But there is certainly a lot of use in being familiar and comfortable with multiple languages.
+There is a lot of truth to this. My recommendation is to find which is most useful and comfortable language for you and spend time mastering that one. For a lot of scientists, this tends to be R. But there is certainly a lot of practicality in being familiar and comfortable with multiple languages.
 
 [Py]:https://www.python.org/
 

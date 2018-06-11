@@ -57,7 +57,7 @@ If you don't want to type out the remaining part and just want to complete the l
 
 R reads from left to right but it reads the entire line before execution. This allows R to do mathematical order of operations. Try it.
 
-```{r}
+```{r eval=FALSE}
 2 + 2 * 3
 ```
 R adheres to "PEMDAS" Parentheses, Exponents, Multiplication/Division, Addition/Subtraction.
@@ -330,7 +330,7 @@ To demonstrate this, let's call a commonly used function, `melt()`. There is no 
 ```{r error=TRUE}
 melt()
 ```
-`Error in melt() : could not find function "melt"` The session has no function assigned to `melt()`. Now let's install the package that defines what `melt()` is.
+The session has no function assigned to `melt()`. Now let's install the package that defines what `melt()` is.
 ```{r eval=FALSE}
 install.packages('reshape2')
 ```
@@ -339,6 +339,7 @@ When using `install.packages()` the name of the package you want to install must
 install.packages('reshape2', quiet = TRUE)
 ```
 Once the package is installed we then need to load it into our session, which is done with
+
 ```{r}
 library(reshape2)
 ```
@@ -352,4 +353,11 @@ We have a new error! Now it is saying we didn't supply the correct arguments to 
 
 [Pack]:https://cran.r-project.org/web/packages/available_packages_by_name.html
 
+
+
+
+
+```{r echo=FALSE}
+detach("package:reshape2", unload=TRUE)
+```
 

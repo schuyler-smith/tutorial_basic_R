@@ -347,7 +347,6 @@ div.tocify {
 <h1>Order of Operations</h1>
 <p>R reads from left to right but it reads the entire line before execution. This allows R to do mathematical order of operations. Try it.</p>
 <pre class="r"><code>2 + 2 * 3</code></pre>
-<pre><code>## [1] 8</code></pre>
 <p>R adheres to “PEMDAS” Parentheses, Exponents, Multiplication/Division, Addition/Subtraction.</p>
 <ul>
 <li>Parenthases <code>( )</code></li>
@@ -553,7 +552,7 @@ x &lt; y || x == y</code></pre>
 <p>To demonstrate this, let’s call a commonly used function, <code>melt()</code>. There is no need to use the function, so I will not explain its use in this tutorial, just try calling it in the console.</p>
 <pre class="r"><code>melt()</code></pre>
 <pre><code>## Error in melt(): could not find function &quot;melt&quot;</code></pre>
-<p><code>Error in melt() : could not find function &quot;melt&quot;</code> The session has no function assigned to <code>melt()</code>. Now let’s install the package that defines what <code>melt()</code> is.</p>
+<p>The session has no function assigned to <code>melt()</code>. Now let’s install the package that defines what <code>melt()</code> is.</p>
 <pre class="r"><code>install.packages(&#39;reshape2&#39;)</code></pre>
 <p>When using <code>install.packages()</code> the name of the package you want to install must be contained in quotations (R treats single and double-quote the same way). You will notice that R wrote a lot of messages to the console. Mostly this is just transparency in what is going on and typically unimportant unless the last thing it says is <code>ERROR</code>.. then something went wrong. If you are positive that the package will install without an error and you don’t care for all that stuff printed to your console, there’s an option for that!</p>
 <pre class="r"><code>install.packages(&#39;reshape2&#39;, quiet = TRUE)</code></pre>

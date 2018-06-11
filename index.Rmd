@@ -32,10 +32,35 @@ And now we are ready to get started!
 [R]:https://mirror.las.iastate.edu/CRAN/
 [RS]:https://www.rstudio.com/products/rstudio/download/#download
 
-# Exercise 1
+# [Exercise 1][Ex1]
 
-**Getting started** - Opening R and familiarizing with the basics of how it works.
+**Getting Started** - Opening R and familiarizing with the basics of how it works.
 
+  + [**First Time In R**](exercise_1.html#first_time_in_r)
+  + [**Whitespace**](exercise_1.html#whitespace)
+  + [**Order of Operations**](exercise_1.html#order_of_operations)
+  + [**Scientific Notation**](exercise_1.html#scientific_notation)
+  + [**Functions**](exercise_1.html#functions)
+  + [**Variables**](exercise_1.html#variables)
+  + [**Operators**](exercise_1.html#operators)
+  + [**Packages**](exercise_1.html#packages)
+
+# [Exercise 2][Ex2]
+
+**Data-Structures** - 
+
+# [Exercise 3][Ex3]
+
+**Writing Scripts** - 
+
+# [Exercise 4][Ex4]
+
+**Processing Our Data** - 
+
+[Ex1]:exercise_1.html
+[Ex2]:exercise_2.html
+[Ex3]:exercise_3.html
+[Ex4]:exercise_4.html
 # Questions
 
 If you have any questions, feel free to contact me by e-mail at <sdsmith@iastate.edu>

@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with R"
+title: "Exercise 2: Data-Structures"
 ---
 
-# First Time In R
+# Data Types

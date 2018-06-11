@@ -8,11 +8,11 @@ navbar:
       href: index.html
     - text: "Exercise 1: Getting Started"
       href: exercise_1.html
-    - text: "Exercise 2: "
+    - text: "Exercise 2: Data-Structures"
       href: exercise_2.html
-    - text: "Exercise 3: "
+    - text: "Exercise 3: Writing Scripts"
       href: exercise_3.html
-    - text: "Exercise 4: "
+    - text: "Exercise 4: Processing Our Data"
       href: exercise_4.html
       
 output:

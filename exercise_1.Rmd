@@ -282,7 +282,7 @@ And there are two others:
 * Modulus `%%`
 * Integer Division `%/%`
 
-### Assingment Operators
+### Assignment Operators
 We have also seen assignment operators:
 
 * Assign-left `=`

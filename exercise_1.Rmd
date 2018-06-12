@@ -26,9 +26,9 @@ It adds the two numbers and prints the sum to the console. R can do all sorts of
 ```{r  eval=FALSE}
 2 - 3; 2 * 3; 4 / 2
 ```
-You *can* copy-paste these into the terminal, but I would not recommend that. For most things in this tutorial, try typing them out. It's like taking notes in class, it takes more effort but it helps to actually process what is happening. And, after-all, we are here to learn and practice, not just get the assignment done :sunglasses:.
+You *can* copy-paste these into the terminal, but I would not recommend that. For most things in this tutorial, try typing them out. It's like taking notes in class, it takes more effort but it helps to actually process what is happening. And, after-all, we are here to learn and practice, not just get the assignment done.
 
-If you did copy-paste the snippet above, or if you typed it verbatim, you will notice that R ran all three operations independently from the single input. This is because in R-scripting a ';' semi-colon represents a line break so that you can put multiple lines of the script together. This is not a common practice as it does not add functionality, it is more difficult to read when scripts get more dense, and its only purpose is aesthetics. However, this is a good thing to be aware of and keep in-mind as you write your own scripts.
+If you did copy-paste the snippet above, or if you typed it verbatim, you will notice that R ran all three operations independently from the single input. This is because in R-scripting a `;` semi-colon represents a line break so that you can put multiple lines of the script together. This is not a common practice as it does not add functionality, it is more difficult to read when scripts get more dense, and its only purpose is aesthetics. However, this is a good thing to be aware of and keep in-mind as you write your own scripts.
 
 Try running the above snippet without the semi-colons.
 

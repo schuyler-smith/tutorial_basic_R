@@ -238,7 +238,7 @@ Variable names can't start with a number, underscore, or period.
 
 Sometimes it takes a length variable name to describe what it is representing, it can be cumbersome to type but will help imensely in the scenario when reproducing your code or sharing with someone else.
 ```{r}
-array_1_5 <- array(seq(1,5,1))
+vector_1_to_5 <- seq(1,5,1)
 ```
 Is far more informative than `x`.
 

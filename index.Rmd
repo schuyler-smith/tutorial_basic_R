@@ -7,7 +7,7 @@ title: "Tutorial: R Basic"
 
 [What is R?][Rwhat]
 
-Essentially, R is a language that was made to handle complex statistics, working with numerical matrices and data-frames. The strength of R over other languages lies in its statistics, linear algebra, and especially ability to make graphs and figures from data.
+Essentially, R is a language that was made to handle complex statistics, working with vectors and data-tables. The strength of R over other languages lies in its statistics, linear algebra, and especially its ability to make graphs and figures.
 
 [Rwhat]:https://www.r-project.org/about.html
 

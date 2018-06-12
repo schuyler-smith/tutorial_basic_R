@@ -70,6 +70,12 @@ And the most common and most informative is to ask the structure `str`.
 ```{r eval=FALSE}
 str(our_vector)
 ```
+Let's make a vector of each type
+```{r}
+our_characters <- letters[1:3]
+our_numbers <- 1:3
+our_logic <- c(TRUE,FALSE,TRUE)
+```
 
 ### Accessing Elements of a Vector
 
@@ -194,12 +200,12 @@ our_list[1]
 ```
 It sort of looks like what we expected to have happen, and this is why it leads to a lot of confusion if you don't know what's happening. You see the `[[1]]` is still there. We know that this should be a vector, so if we check its type
 ```{r eval=FALSE}
-typeof(our_list[1])
+str(our_list[1])
 ```
 It says `"list"`. We called the first element of the list, but not the object inside it. The index of the object in the list is inside the `[[i]]`.
 ```{r eval=FALSE}
 our_list[[1]]
-typeof(our_list[[1]])
+str(our_list[[1]])
 ```
 And now we have that character vector from the list. From there we can call elements of that vector by index also, the indices read from top-down, left-right, so the more indices to the right, the more specific we are being.
 ```{r eval=FALSE}
@@ -229,9 +235,9 @@ matrix(1:9, nrow=3, byrow=TRUE)
 ```
 Notice the difference?
 
-But also, we said that each vertical vector must be the same atomic type, so let's demonstrate that. Check the `typeof(our_matrix)` before and after entering this into the console.
+But also, we said that each vertical vector must be the same atomic type, so let's demonstrate that. Check the `str(our_matrix)` before and after entering this into the console.
 ```{r}
-our_matrix[,1] <- letters[1:3]
+our_matrix[,1] <- our_characters
 ```
 Notice, first off that the matrix has only one type, and also that it changed it to be character.
 
@@ -262,9 +268,88 @@ You'll notice the result of subsetting a matrix is always a vector. You may have
 
 # Array 
 
+Arrays are similar to matrices but can have more than two dimensions. Let's look.
+```{r eval=FALSE}
+our_array <- array(1:27, dim=c(3,3,3))
+```
+Arrays are not very common, and most tutorials I've seen don't even bother discussing them. But since they exist, it is good to be aware of them. Using what we already learned about how indexing works and how to use it with other data structures, we can figure out how arrays work. Try some different things.
+```{r eval=FALSE}
+our_array[,,3]
+our_array[,2,1]
+our_array[,,3][2,1]
+```
+If it doesn't make sense, I think the clearest way to look at it and figure it out is like this:
+```{r eval=FALSE}
+our_array[,,2]
+our_array[,2,2]
+our_array[1,2,2]
+```
+You can see that
+```{r eval=FALSE}
+our_array[1,2,2]
+```
+Is the same as saying
+```{r eval=FALSE}
+our_array[,,2][1,2]
+```
+
 <br>
 
 # Data Frame 
+
+A data frame is what you would get if a matrix and a list started filing joint-taxes. If you don't know what that means, ask your parents, it's outside the scope of this tutorial.
+
+Data frames are one of the most common structures users implement their data in. They are 2-dimensional objects that can hold equal length vectors of different atomic types.
+```{r}
+our_data_frame <- data.frame(our_characters, our_numbers, our_logic)
+```
+It looks like a matrix, right? But look..
+```{r eval=FALSE}
+typeof(our_data_frame)
+```
+R sees it as a list.
+
+If we look at its structure
+```{r}
+str(our_data_frame)
+```
+It knows it's a data.frame, it has 3 observations (or 3 colums) with 3 variables in each. It then lists each of the vectors that we used to create the data.frame and what their structure is. You may notice that instead of `chr` our characters are listed as `Factor`. 
+
+### Factors
+
+Factors look like characters but are stored as integers. Notice the absences of `""` when we call the column of `our_characters`.
+```{r eval=FALSE}
+our_data_frame[,1]
+```
+But if we try a logical comparison on one of them
+```{r}
+our_data_frame[3,1] == "c"
+```
+But look at this.
+```{r}
+as.numeric("c")
+as.numeric(our_data_frame[3,1])
+```
+How R treats factors is important because it will treat them as either nominal or ordinal when executing statistical operations or when graphing. We can see how it treats the factors ordinally using 
+```{r eval=FALSE}
+ordered(our_data_frame$our_characters)
+```
+
+### Subsetting Data Frames
+
+Data frames can be subset exactly like matrices, in addition to other, more practical, ways. If you recall when we used `str()` to look at the data frame It listed the variable names of the object we put into out data frame. Those variable names became the column names `colanames()` of the data frame. Column names are denoted with `$` as shown with `str()`.
+```{r eval=FALSE}
+our_data_frame$our_numbers
+```
+But this only allows a single coulmn to be called by name. If we put the name inside of the index brackets we can call multiple columns by name.
+```{r eval=FALSE}
+our_data_frame[,c('our_logic','our_numbers')]
+```
+Note that data frames also have `rownames()` that are by default just the index number.
+```{r eval=FALSE}
+our_data_frame[c('3','1'),]
+```
+
 
 <br>
 

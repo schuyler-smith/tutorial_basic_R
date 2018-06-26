@@ -579,13 +579,18 @@ x &lt; y || x == y</code></pre>
 <p>R is an open-source program. This means that anyone is allowed to contribute to it, and most commonly this is done in the form of packages. Packages are are essentially a collection of custom functions. The need to install these packages is because sometimes they can be rather large and there are over 12,500 <a href="https://cran.r-project.org/web/packages/available_packages_by_name.html">packages maintained in CRAN</a>. To keep R lightweight these packages are installed and opened in each session on-demand, and only base-R is loaded into each session by default.</p>
 <p>To demonstrate this, let’s call a commonly used function, <code>melt()</code>. There is no need to use the function, so I will not explain its use in this tutorial, just try calling it in the console.</p>
 <pre class="r"><code>melt()</code></pre>
-<pre><code>## Error in melt(): could not find function &quot;melt&quot;</code></pre>
+<pre><code>## Error in is.data.table(data): argument &quot;data&quot; is missing, with no default</code></pre>
 <p>The session has no function assigned to <code>melt()</code>. Now let’s install the package that defines what <code>melt()</code> is.</p>
 <pre class="r"><code>install.packages(&#39;reshape2&#39;)</code></pre>
 <p>When using <code>install.packages()</code> the name of the package you want to install must be contained in quotations (R treats single and double-quote the same way). You will notice that R wrote a lot of messages to the console. Mostly this is just transparency in what is going on and typically unimportant unless the last thing it says is <code>ERROR</code>.. then something went wrong. If you are positive that the package will install without an error and you don’t care for all that stuff printed to your console, there’s an option for that!</p>
 <pre class="r"><code>install.packages(&#39;reshape2&#39;, quiet = TRUE)</code></pre>
 <p>Once the package is installed we then need to load it into our session, which is done with</p>
 <pre class="r"><code>library(reshape2)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;reshape2&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:data.table&#39;:
+## 
+##     dcast, melt</code></pre>
 <p>Notice quotations are not needed to use <code>library</code>, however it will work with or without them.</p>
 <p>Now lets try to call our function again.</p>
 <pre class="r"><code>melt()</code></pre>

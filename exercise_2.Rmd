@@ -352,7 +352,7 @@ our_data_frame[c('3','1'),]
 
 <br>
 
-# Table 
+# Data Table 
 
 You will often see references to data tables, and in some cases tibbles. Data tables offer all the same features as data frames but with additional functionality. As a cost for gaining the functionality, the syntax of data tables is more obtuse. To try to mary the function of data tables with easy syntax Haley Wickham introduced tibbles in his tidyverse package. For general use though, data frames offer sufficient functionality to accomplish the data analytic needs of the average scientist.
 

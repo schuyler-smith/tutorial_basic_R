@@ -1,5 +1,5 @@
 ---
-title: "Exercise 4: Processing Our Data"
+title: "Exercise 4: Graphing Data"
 ---
 <br>
 

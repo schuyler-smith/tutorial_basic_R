@@ -3,9 +3,25 @@ title: "Exercise 3: Writing Scripts"
 ---
 <br>
 
+Often we find that we need to do the exact same procedure at different time points, or just want to re-run an analysis to make sure we did it correctly. We can either write down our workflow on a piece of paper, and type it through the console again; Or we can script it. A scripting is typing the workflow of a computational analysis into a file that can be run by simply plugging in the data. There are many styles and best practices for scripting; the most important thing being that it is easy to follow and the processes can be interpreted by someone else (or you 2 years in the future).
+
+<br>
+
 # R Files
 
+R uses several different file types, and even more with RStudio.
+
+## Scripts
+
+R uses several file-types for its scripts. The classic file is a `.R` file, or `.r`. There is nothing inherently special about these files, they can be opened by any text editor, but the extension tells the computer it is meant to be opened with R.
+
+## Data
+
+
+There are special R files called `.rds` `.RDS` files.  
+
+
 <br><br><br>
-<strong>Continue: [Exercise 4: Processing Our Data][Ex4]</strong>
+<strong>Continue: [Exercise 4: Graphing Data][Ex4]</strong>
 
 [Ex4]:exercise_4.html

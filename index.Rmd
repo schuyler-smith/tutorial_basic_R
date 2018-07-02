@@ -42,6 +42,7 @@ And now we are ready to get started!
   + [**Functions**](exercise_1.html#functions)
   + [**Variables**](exercise_1.html#variables)
   + [**Operators**](exercise_1.html#operators)
+  + [**Loops**](exercise_1.html#loops)
   + [**Packages**](exercise_1.html#packages)
 
 # [Exercise 2 - Data-Structures][Ex2]
@@ -59,7 +60,7 @@ And now we are ready to get started!
 
 # [Exercise 3 - Writing Scripts][Ex3]
 
-# [Exercise 4 - Processing Our Data][Ex4]
+# [Exercise 4 - Graphing Data][Ex4]
 
 
 [Ex1]:exercise_1.html

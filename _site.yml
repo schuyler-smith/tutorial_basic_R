@@ -1,5 +1,5 @@
 name: "Tutorial: Basic R"
-output_dir: "."
+output_dir: "site"
 navbar:
   title: "Tutorial: Basic R"
   type: inverse
@@ -12,7 +12,7 @@ navbar:
       href: exercise_2.html
     - text: "Exercise 3: Writing Scripts"
       href: exercise_3.html
-    - text: "Exercise 4: Processing Our Data"
+    - text: "Exercise 4: Graphing Data"
       href: exercise_4.html
       
 output:

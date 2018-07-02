@@ -353,9 +353,15 @@ It checks both conditions and evaluates if either is TRUE.. which is the same as
 x <= y 
 ```
 But it demonstrates the point.
-```{r eval=FALSE}
+```{r eval=FALSE}l
 x < y || x == y || x > y #basically, does x exist?
 ```
+
+<br>
+
+# Loops
+
+  
 
 <br>
 

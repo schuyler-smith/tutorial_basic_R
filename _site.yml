@@ -17,6 +17,7 @@ navbar:
       
 output:
   html_document:
+    lib_dir: site_libs
     theme: cerulean
     highlight: textmate
     include:

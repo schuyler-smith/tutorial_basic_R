@@ -26,4 +26,4 @@ output:
     toc: true
     toc_float: 
       collapsed: false
-      smooth_scroll: true
+      smooth_scroll: false

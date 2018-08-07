@@ -71,7 +71,7 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="misc/styles.css" type="text/css" />
+<link rel="stylesheet" href="misc\styles.css" type="text/css" />
 
 </head>
 
@@ -93,6 +93,9 @@ img {
 }
 .tabbed-pane {
   padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
 }
 button.code-folding-btn:focus {
   outline: none;
@@ -317,18 +320,62 @@ div.tocify {
 <p><br></p>
 <p>Often we find that we need to do the exact same procedure at different time points, or just want to re-run an analysis to make sure we did it correctly. We can either write down our workflow on a piece of paper, and type it through the console again; Or we can script it. A scripting is typing the workflow of a computational analysis into a file that can be run by simply plugging in the data. There are many styles and best practices for scripting; the most important thing being that it is easy to follow and the processes can be interpreted by someone else (or you 2 years in the future).</p>
 <p><br></p>
-<div id="r-files" class="section level1">
-<h1>R Files</h1>
+<div id="r-files" class="section level2">
+<h2>R Files</h2>
 <p>R uses several different file types, and even more with RStudio.</p>
+</div>
 <div id="scripts" class="section level2">
 <h2>Scripts</h2>
 <p>R uses several file-types for its scripts. The classic file is a <code>.R</code> file, or <code>.r</code>. There is nothing inherently special about these files, they can be opened by any text editor, but the extension tells the computer it is meant to be opened with R.</p>
 </div>
 <div id="data" class="section level2">
 <h2>Data</h2>
-<p>There are special R files called <code>.rds</code> <code>.RDS</code> files.</p>
-<p><br><br><br> <strong>Continue: <a href="exercise_4.html">Exercise 4: Graphing Data</a></strong></p>
+<p>There are special R files called <code>.rds</code> or <code>.RDS</code> files. These files are to used to save objects and quickly load them for later use. This is extremely handy if you are working on a project and you have a function that takes 20-minutes to execute, you don’t want to do that every time you open the script. With <code>saveRDS</code> you can save the output of your analysis and reload it later to save time.</p>
 </div>
+<div id="working-directory" class="section level2">
+<h2>Working Directory</h2>
+<p>A directory is the same as what is commonly refered to as a folder on your computer. The difference between the two is pedantic, essentially the difference is you can click on a folder but a folder is a directory.. Anyways.. When we are working in R and want to load or save files it is important to know what our working directory is so that we can tell it where to find the file we are interested in. If we are unsure of our working directory we can find it using</p>
+<pre class="r"><code>getwd()</code></pre>
+<p>So this is where R will look for a file unless we tell it otherwise.</p>
+<p>We can tell it to always look somewhere else by assigning the working directory with</p>
+<pre class="r"><code>setwd()</code></pre>
+<p>And then giving it a path inside the command. A path is the series of directories that the computer needs to traverse to find what it is looking for.</p>
+<p>If we just need a single file we can assign the path to that specific file, but if we are going to be needed a number of files from the same directory then it is often easier to just assign the working directory to where they are located. There are two types of paths in programming.</p>
+<div id="absolute-paths" class="section level4">
+<h4>Absolute Paths</h4>
+<p>Absolute paths are exactly like they sound. No matter where your working directory is assigned, you can always find the file if you follow this path. This means that the path needs to start at the very base of your directory. With a Unix machine this can be done as either</p>
+<pre class="r"><code>input_file &lt;- &quot;/home/schuyler/path_to_file&quot;</code></pre>
+<p>or this can be shortcutted with</p>
+<pre class="r"><code>input_file &lt;- &quot;~/path_to_file&quot;</code></pre>
+<p>For Windows users it’s a little different. You need to start from the Drive partition letter (typically for regular users this will be <code>C:</code>)</p>
+<pre class="r"><code>input_file &lt;- &quot;C:\users\schuyler\path_to_file&quot;</code></pre>
+<p>*Notice 1: for Windows you need to use forward-slashes and for Unix systems back-slashes.</p>
+<p>*Notice 2: the path is contained in <code>&quot;&quot;</code>s. Anything that is not an object in memory for R needs to be contained in this way, or it will look for an object and fail with an error.. or find what you didn’t mean to.</p>
+</div>
+<div id="relative-paths" class="section level4">
+<h4>Relative Paths</h4>
+<p>Relative paths are assigned from where your working directory is. Navigating relative paths can be confusing sometimes, but can be very useful when you work on the same project on multiple machines. If I wanted to access a file in a directory in my current working directory called <code>data/</code> I would call it as</p>
+<pre class="r"><code>input_file &lt;- &quot;data/path_to_file&quot;</code></pre>
+<p>What if I changed my working directory to <code>data/</code> and then I needed to get a file that was back in my project directory? This is called accessing “up a level” and can be done with <code>../</code></p>
+<pre class="r"><code>input_file &lt;- &quot;../path_to_file&quot;</code></pre>
+</div>
+</div>
+<div id="writing-scripts" class="section level2">
+<h2>Writing Scripts</h2>
+<p>It is typically good practice to start a script by loading all the packages that you will need to successfully execute everything you are trying to do. Optionally you could add comments at the start of your script to give notes about what it does and how it works.</p>
+<p>Once you have all your packages loaded then you should make sure you have your working directory set. It should look something like this</p>
+<pre class="r"><code>#This script loads some packages and sets my working directory
+
+library(data.table)
+library(ggplot2)
+
+setwd(&quot;/home/schuyler/Tutorial_Basic_R&quot;)</code></pre>
+</div>
+<div id="loading-data" class="section level2">
+<h2>Loading Data</h2>
+<p>You can manually type all of your data into R.. but the point of learning a scripting language is to increase efficiency, so R has functions to read in your data from a file on your computer.</p>
+<p>From this point we are going to need an example dataset. I am going to steal a dataset from my friend <a href="https://github.com/dunivint">Taylor Dunivin</a> for us to use. This data is gene abundances from a site in Centralia, Pennsylvania, where Taylor and her lab study microbiomes of an underground <a href="https://en.wikipedia.org/wiki/Centralia_mine_fire">coal mine fire</a> that has been burning since 1962!</p>
+<p><br><br><br> <strong>Continue: <a href="exercise_4.html">Exercise 4: Graphing Data</a></strong></p>
 </div>
 
 

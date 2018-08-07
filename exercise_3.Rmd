@@ -7,7 +7,7 @@ Often we find that we need to do the exact same procedure at different time poin
 
 <br>
 
-# R Files
+## R Files
 
 R uses several different file types, and even more with RStudio.
 
@@ -17,11 +17,85 @@ R uses several file-types for its scripts. The classic file is a `.R` file, or `
 
 ## Data
 
+There are special R files called `.rds` or `.RDS` files. These files are to used to save objects and quickly load them for later use. This is extremely handy if you are working on a project and you have a function that takes 20-minutes to execute, you don't want to do that every time you open the script. With `saveRDS` you can save the output of your analysis and reload it later to save time.
 
-There are special R files called `.rds` `.RDS` files.  
+## Working Directory
+
+A directory is the same as what is commonly refered to as a folder on your computer. The difference between the two is pedantic, essentially the difference is you can click on a folder but a folder is a directory.. Anyways.. When we are working in R and want to load or save files it is important to know what our working directory is so that we can tell it where to find the file we are interested in. If we are unsure of our working directory we can find it using 
+
+```{r, eval=FALSE}
+getwd()
+```
+So this is where R will look for a file unless we tell it otherwise. 
+
+We can tell it to always look somewhere else by assigning the working directory with 
+```{r, eval=FALSE}
+setwd()
+```
+And then giving it a path inside the command. A path is the series of directories that the computer needs to traverse to find what it is looking for.
+
+If we just need a single file we can assign the path to that specific file, but if we are going to be needed a number of files from the same directory then it is often easier to just assign the working directory to where they are located. There are two types of paths in programming.
+
+#### Absolute Paths
+
+Absolute paths are exactly like they sound. No matter where your working directory is assigned, you can always find the file if you follow this path. This means that the path needs to start at the very base of your directory. With a Unix machine this can be done as either 
+
+```{r, eval=FALSE}
+input_file <- "/home/schuyler/path_to_file"
+```
+or this can be shortcutted with
+```{r, eval=FALSE}
+input_file <- "~/path_to_file"
+```
+For Windows users it's a little different. You need to start from the Drive partition letter (typically for regular users this will be `C:`)
+```{r, eval=FALSE}
+input_file <- "C:\users\schuyler\path_to_file"
+```
+*Notice 1: for Windows you need to use forward-slashes and for Unix systems back-slashes.
+
+*Notice 2: the path is contained in `""`s. Anything that is not an object in memory for R needs to be contained in this way, or it will look for an object and fail with an error.. or find what you didn't mean to. 
+
+#### Relative Paths
+
+Relative paths are assigned from where your working directory is. Navigating relative paths can be confusing sometimes, but can be very useful when you work on the same project on multiple machines. If I wanted to access a file in a directory in my current working directory called `data/` I would call it as
+```{r, eval=FALSE}
+input_file <- "data/path_to_file"
+```
+What if I changed my working directory to `data/` and then I needed to get a file that was back in my project directory? This is called accessing "up a level" and can be done with `../`
+```{r, eval=FALSE}
+input_file <- "../path_to_file"
+```
+
+## Writing Scripts
+
+It is typically good practice to start a script by loading all the packages that you will need to successfully execute everything you are trying to do. Optionally you could add comments at the start of your script to give notes about what it does and how it works.
+
+Once you have all your packages loaded then you should make sure you have your working directory set. It should look something like this
+
+```{r, eval=FALSE}
+#This script loads some packages and sets my working directory
+
+library(data.table)
+library(ggplot2)
+
+setwd("/home/schuyler/Tutorial_Basic_R")
+```
+
+## Loading Data
+
+You can manually type all of your data into R.. but the point of learning a scripting language is to increase efficiency, so R has functions to read in your data from a file on your computer.
+
+From this point we are going to need an example dataset. I am going to steal a dataset from my friend [Taylor Dunivin][TD] for us to use. This data is gene abundances from a site in Centralia, Pennsylvania, where Taylor and the [Shade-lab][shade] study microbiomes of an underground [coal mine fire][cent] that has been burning since 1962.
+
+If you haven't already downloaded the files we can do it now through R!
+
+First we need to set our working directory to where 
 
 
 <br><br><br>
 <strong>Continue: [Exercise 4: Graphing Data][Ex4]</strong>
 
 [Ex4]:exercise_4.html
+[TD]:https://github.com/dunivint
+[cent]:https://en.wikipedia.org/wiki/Centralia_mine_fire
+[shade]:http://ashley17061.wixsite.com/shadelab

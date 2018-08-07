@@ -36,7 +36,7 @@ And then giving it a path inside the command. A path is the series of directorie
 
 If we just need a single file we can assign the path to that specific file, but if we are going to be needed a number of files from the same directory then it is often easier to just assign the working directory to where they are located. There are two types of paths in programming.
 
-#### Absolute Paths
+### Absolute Paths
 
 Absolute paths are exactly like they sound. No matter where your working directory is assigned, you can always find the file if you follow this path. This means that the path needs to start at the very base of your directory. With a Unix machine this can be done as either 
 
@@ -55,7 +55,7 @@ input_file <- "C:\users\schuyler\path_to_file"
 
 *Notice 2: the path is contained in `""`s. Anything that is not an object in memory for R needs to be contained in this way, or it will look for an object and fail with an error.. or find what you didn't mean to. 
 
-#### Relative Paths
+### Relative Paths
 
 Relative paths are assigned from where your working directory is. Navigating relative paths can be confusing sometimes, but can be very useful when you work on the same project on multiple machines. If I wanted to access a file in a directory in my current working directory called `data/` I would call it as
 ```{r, eval=FALSE}
@@ -87,10 +87,235 @@ You can manually type all of your data into R.. but the point of learning a scri
 
 From this point we are going to need an example dataset. I am going to steal a dataset from my friend [Taylor Dunivin][TD] for us to use. This data is gene abundances from a site in Centralia, Pennsylvania, where Taylor and the [Shade-lab][shade] study microbiomes of an underground [coal mine fire][cent] that has been burning since 1962.
 
+### Downloading Files
 If you haven't already downloaded the files we can do it now through R!
 
-First we need to set our working directory to where 
+```{r, eval=FALSE}
+download.file("https://github.com/sdsmith1390/Tutorial_Basic_R/archive/master.zip", destfile = "Tutorial_Basic_R.zip")
+unzip("Tutorial_Basic_R.zip")
+setwd("Tutorial_Basic_R-master/data")
+list.files()
+```
+Now we have the data files we need!
 
+### Reading in Files
+
+Almost every variation of reading in a file is just a modification of the funtion `read.table()` but handle delimiters differently. A delimiter is any symbol that separates columns. The most common one people may not even know they are aware of is the comma `,`. Commas separate columns in a comma separated value file, or `.csv`. Other delimiters may be `. | /` but it can be any symbol really. For tab separated values (`.tsv`) files the delimiter is a tab, represented in programming languages as `\t`.
+
+It's usually good to follow convention when naming your files to make it apparent what the delimiter is (`.csv` or `.tsv`). Our data here is saved as `.txt` which only tells us that it's a plain text file, so we need to open the file first to figure out the delimiter. I already did this, so I know that it is tab-delimited.
+
+### Functions for Reading
+```{r, eval=FALSE}
+sample_data <- read.delim("gene_abundance_centralia.txt", sep = "\t")
+```
+other functions do the same thing, but automatically set the delimiter
+```{r, eval=FALSE}
+head(read.csv("gene_abundance_centralia.txt"))
+head(read.tsv("gene_abundance_centralia.txt"))
+```
+Any of these functions can perform all of the same functions as one another, just different defaults are set for the arguments.
+```{r, eval=FALSE}
+head(read.csv("gene_abundance_centralia.txt", sep = "\t"))
+```
+*Note that when you read in a file, if you do not assign it to an object, it just prints the contents to the console.
+
+Taylor's data, like often is the case, is in more than one file. The second file contains information about the samples in the experiment, commonly refered to as 'metadata'. We need this data for our analysis, and R is great for this type of issue.
+
+```{r, eval=FALSE}
+metadata <- read.table("Centralia_temperature.txt")
+```
+
+R requires very specific formatting for reading in data, but there are arguments to help us get through these headaches.
+
+### Arguments for Reading
+
+R requires specific attributes for reading files in as data frames. If you want to read in column names from the first line of your data then they all need to be unique. If you have a column name repeated then sometimes it is easier to read the file in without the names and change them later.
+
+```{r, eval=FALSE}
+head(read.csv("Centralia_temperature.txt", sep = "\t", header = FALSE))
+```
+
+If some of the entries have missing values in the last column or columns then R will error because it does not fit the dimension, as it did for this file when we first attempted to read it in.. but it will let us force it to fill them with `NA`. But you need to be careful with this because R is going to try to make it make sense..
+
+```{r, eval=FALSE}
+head(read.table("Centralia_temperature.txt", fill = TRUE), 8)
+```
+
+Specifying the delimiter helps to ensure that your data is correctly read in.
+
+```{r, eval=FALSE}
+metadata <- read.table("Centralia_temperature.txt", sep = "\t", header = TRUE)
+```
+
+## Combining Files
+
+If you have looked at the files you may have noticed that they have data in common. A best practice for viewing the contents of an object in R is the use of `head()`.
+
+```{r, eval=FALSE}
+head(sample_data)
+head(metadata)
+```
+
+Both files have a column named `Site` with common entries, so we can use this to tell R how to combine the two objects.
+
+```{r, eval=FALSE}
+merged_data <- merge(sample_data, metadata, by = "Site")
+```
+
+Now we have a single object that contains all of our data. If we wanted to leave now and come back to our project tomorrow we could load both of these files back in again and combine them all over, or we can save this file and load just the single one.
+
+## Saving Files
+
+Like reading a file, there are several functions to write a file and they are all variations of `write.table()`.
+
+### Writing to Text Files
+```{r, eval=FALSE}
+write.table(merged_data, "merged_data.csv", sep = ",", quote = FALSE)
+```
+which is the same as
+```{r, eval=FALSE}
+write.csv(merged_data, "merged_data.csv", quote = FALSE)
+```
+`quote = FALSE` is an argument that often gives new users a bit of a headache. R will write character data contained in `""`s. `quote = FALSE` stops it from doing this.
+
+### Writing to RDS file
+
+Alternatively we can save this object as an `.RDS`. Doing this saves the object as-is and we can load it back in with ease, however we can't look at it or open it in another program, it becomes specific to R.
+
+```{r, eval=FALSE}
+saveRDS(merged_data, "merged_data.RDS")
+```
+That's it! It just saves it as we had it and we don't need to worry if anything was altered in the process.
+
+## Functions
+
+Functions are the heart of efficiency for programming languages. A Function takes input(s) as variables and return a single value. We have been using functions this whole time but now lets write our own. Writing our own function lets us simplify a process that we need to repeat by assigning it to a single command. R is open-source and has been around for a long time, so most basic functions already exist. Always check online to see if there is a function that exists that does what you want before spending the time to write your own. We are going to ignore that here though.
+
+A function is assigned by calling `function()` and putting a variable in the brackets that will be the input (x is the most commong but we aren't handwriting math equations so I am going to change the input after this example)
+
+```{r}
+our_mean <- function(x){}
+```
+After you call `function()` you put the operation you want the function to perform in the `{ }` after it. The function can contain as many steps as needed.
+```{r}
+our_mean <- function(input){
+  sum(input)/length(input)
+}
+```
+Test our function to find the mean temperature of all the sites in our `merged_data` object.
+
+```{r, eval=FALSE}
+our_mean(merged_data$Temperature)
+```
+
+The function will automatically return the last operation that would be output to the terminal, but the best practice is to specify what it should return.. with `return()`
+
+```{r}
+our_mean <- function(input){
+  return(sum(input)/length(input))
+}
+```
+If your function gets complicated, or you just want to make it simple to read, you can assing variables within it
+```{r}
+our_mean <- function(input){
+  input_sum <- sum(input)
+  input_count <- length(input)
+  input_mean <- input_sum/input_count
+  return(input_mean)
+}
+```
+Notice that after you use this function, none of the variables are retained in our workspace, it just returns the value we ask it to. There are ways to change this, but that's not a common or great use of functions so we will not cover that here.
+
+## Loops
+
+Sometimes we need to perform a function repeatedly.. the easiest way to do this is with a for loop. Loops exist in nearly every programming language. There are different types of loops, but R has 'for-loops'. A for loop will iterate a process over a series of inputs.
+
+```{r}
+for (i in 1:3){
+  print(i)
+}
+```
+
+Suppose you want to start the loop and only complete it on iterations that meet certain criteria, you can tell R that if that criteria is met, then don't continue the function in the loop and start the `next` iteration.
+```{r}
+for (i in 1:3){
+  if (!i %% 2){
+    next
+  }
+    print(i)
+}
+```
+
+```{r}
+for (i in c("test_1","test_2")){
+    print(i)
+}
+```
+Let's make a basic function to test looping over our dataset.
+```{r}
+basic_fun <- function(input){
+  return(input + 1)
+}
+```
+
+Let's add 1 to each value for Temperature in our `metadata`
+
+```{r, eval=FALSE}
+for(i in metadata$Temperature){
+  print(basic_fun(i))
+}
+```
+It's getting hotter in here!
+
+Notice though that these changes were not permanent.
+```{r, eval=FALSE}
+head(metadata$Temperature)
+```
+Unlike in functions, objects we assign in a loop do continue to exist after the loop ends, so we can take advantag of this.
+```{r, eval=FALSE}
+for(i in metadata$Temperature){
+  hotter_temp <- basic_fun(i)
+}
+```
+But every iteration of the loop overwrites our `hotter_temp` so we only keep the last one..
+
+We can change the values of the object by using the indexing system and looping over it. First lets make a new object to not overwrite our original one.
+```{r, eval=FALSE}
+hotter_temp <- metadata
+```
+Now change this one
+```{r, eval=FALSE}
+for(i in 1:length(hotter_temp$Temperature)){
+  hotter_temp$Temperature[i] <- basic_fun(hotter_temp$Temperature[i])
+}
+```
+
+This got the job done.. but there is a better way.
+
+## Apply
+
+Apply is similar to a for loop, but it applies a function to each index of the input.
+
+```{r, eval=FALSE}
+apply(hotter_temp[2], 1, FUN = basic_fun)
+```
+and we can assign that to our object 
+```{r, eval=FALSE}
+hotter_temp$Temperature <- apply(hotter_temp[2], 1, FUN = basic_fun)
+```
+Apply was designed to quickly apply a function (`FUN =`) to a matrix, either by row `1` or by column `2` (the second argument in our command)
+
+Apply can be very powerful, but also can take a bit of time to get a strong grasp of how and when to use it.
+
+## Subsetting Data
+
+There are many many ways to subset data in R, but a useful one is the `subset()` function.
+
+Say we wanted to only look at a specific gene in our data, we could use subset to pull out all data that comes from that gene.
+```{r, eval=FALSE}
+subset(merged_data, Gene == "arsM")
+```
+This should be a good set of tools to start analyzing your data!
 
 <br><br><br>
 <strong>Continue: [Exercise 4: Graphing Data][Ex4]</strong>

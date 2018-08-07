@@ -76,7 +76,7 @@ Once you have all your packages loaded then you should make sure you have your w
 #This script loads some packages and sets my working directory
 
 library(data.table)
-library(ggplot2)
+library(reshape2)
 
 setwd("/home/schuyler/Tutorial_Basic_R")
 ```
@@ -185,7 +185,7 @@ Alternatively we can save this object as an `.RDS`. Doing this saves the object 
 ```{r, eval=FALSE}
 saveRDS(merged_data, "merged_data.RDS")
 ```
-That's it! It just saves it as we had it and we don't need to worry if anything was altered in the process.
+That's it! It just saves it as we had it and we don't need to worry if anything was altered in the process. And can be read back in with `readRDS()`.
 
 ## Functions
 

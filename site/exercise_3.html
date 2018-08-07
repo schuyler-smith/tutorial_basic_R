@@ -367,7 +367,7 @@ div.tocify {
 <pre class="r"><code>#This script loads some packages and sets my working directory
 
 library(data.table)
-library(ggplot2)
+library(reshape2)
 
 setwd(&quot;/home/schuyler/Tutorial_Basic_R&quot;)</code></pre>
 </div>
@@ -435,7 +435,7 @@ head(metadata)</code></pre>
 <h3>Writing to RDS file</h3>
 <p>Alternatively we can save this object as an <code>.RDS</code>. Doing this saves the object as-is and we can load it back in with ease, however we can’t look at it or open it in another program, it becomes specific to R.</p>
 <pre class="r"><code>saveRDS(merged_data, &quot;merged_data.RDS&quot;)</code></pre>
-<p>That’s it! It just saves it as we had it and we don’t need to worry if anything was altered in the process.</p>
+<p>That’s it! It just saves it as we had it and we don’t need to worry if anything was altered in the process. And can be read back in with <code>readRDS()</code>.</p>
 </div>
 </div>
 <div id="functions" class="section level2">
@@ -523,6 +523,7 @@ head(metadata)</code></pre>
 <p>There are many many ways to subset data in R, but a useful one is the <code>subset()</code> function.</p>
 <p>Say we wanted to only look at a specific gene in our data, we could use subset to pull out all data that comes from that gene.</p>
 <pre class="r"><code>subset(merged_data, Gene == &quot;arsM&quot;)</code></pre>
+<p>This should be a good set of tools to start analyzing your data!</p>
 <p><br><br><br> <strong>Continue: <a href="exercise_4.html">Exercise 4: Graphing Data</a></strong></p>
 </div>
 

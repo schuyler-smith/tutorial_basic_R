@@ -60,7 +60,29 @@ And now we are ready to get started!
 
 # [Exercise 3 - Writing Scripts][Ex3]
 
+  + [**R Files**](exercise_3.html#dr_files)
+  + [**Data**](exercise_3.html#data)
+  + [**Working Directory**](exercise_3.html#working_directory)
+  + [**Writing Scripts**](exercise_3.html#writing_scripts)
+  + [**Loading Data**](exercise_3.html#loading_data)
+  + [**Combining Files**](exercise_3.html#combining_files)
+  + [**Saving Files**](exercise_3.html#saving_files)
+  + [**Functions**](exercise_3.html#functions)
+  + [**Loops**](exercise_3.html#loops)
+  + [**Apply**](exercise_3.html#apply)
+  + [**Subsetting Data**](exercise_3.html#subsetting_data)
+
 # [Exercise 4 - Graphing Data][Ex4]
+
+  + [**Plotting**](exercise_4.html#plotting)
+  + [**Geometric Layers**](exercise_4.html#geometric_layers)
+  + [**Colors in R**](exercise_4.html#colors_in_r)
+  + [**Aesthetics and Colors**](exercise_4.html#aesthetics_and_colors)
+  + [**Facets**](exercise_4.html#facets)
+  + [**Labels**](exercise_4.html#labels)
+  + [**Themes**](exercise_4.html#themes)
+  + [**Bar Charts**](exercise_4.html#bar_charts)
+  + [**Saving Figures**](exercise_4.html#saving_figures)
 
 
 [Ex1]:exercise_1.html

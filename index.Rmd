@@ -83,6 +83,7 @@ And now we are ready to get started!
   + [**Themes**](exercise_4.html#themes)
   + [**Bar Charts**](exercise_4.html#bar_charts)
   + [**Saving Figures**](exercise_4.html#saving_figures)
+  + [**Final Practice**](exercise_4.html#final_practice)
 
 
 [Ex1]:exercise_1.html

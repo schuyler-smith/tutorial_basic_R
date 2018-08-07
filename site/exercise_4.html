@@ -474,7 +474,19 @@ dev.off()</code></pre>
 <p><code>ggsave()</code> will automatically save the last plot you called before this by default (can be changed with argument <code>plot =</code>. It automatically opens and closes the device, and it defaults to a <code>res = 300</code>. It can take the same <code>height=</code>, <code>wdith=</code>, and <code>units=</code> arguments also. Additionally it will automatically use the device that matches the file extension in your <code>file =</code>.</p>
 <pre class="r"><code>p
 ggsave(filename = &quot;My_Graph.png&quot;, height = 5, width = 5, units = &quot;in&quot;)</code></pre>
-<p><br><br> Good luck in you data analysis! And if you can’t find the answer online, never hesitate to ask a friend.</p>
+</div>
+<div id="final-practice" class="section level2">
+<h2>Final Practice</h2>
+<p>To sum it all up, try reproducing this graph from the dataset <code>final_practice_problem.RDS</code>. This is data from a project that I worked on and it should look like this.</p>
+<pre><code>##      Sample      OTU Abundance Treatment Month
+## 2185     X5    OTU_2     53767    Bagged   May
+## 3060   X652    OTU_2     29150    Bagged  June
+## 2193     X5    OTU_5     19977    Bagged   May
+## 4705    X87 OTU_4036     15324   Exposed  June
+## 3068   X652    OTU_5     13588    Bagged  June
+## 2010   X473    OTU_2     13222    Bagged  June</code></pre>
+<p><img src="exercise_4_files/figure-html/unnamed-chunk-32-1.png" width="576" /></p>
+<p><br><br><br><br> Good luck in your data analysis! And if you can’t find the answer online, never hesitate to ask a friend.</p>
 </div>
 
 

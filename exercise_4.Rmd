@@ -271,8 +271,40 @@ Another way to save this is with a function in ggplot.. which is for sure friend
 p
 ggsave(filename = "My_Graph.png", height = 5, width = 5, units = "in")
 ```
-<br><br>
-Good luck in you data analysis! And if you can't find the answer online, never hesitate to ask a friend.
+
+## Final Practice
+
+To sum it all up, try reproducing this graph from the dataset `final_practice_problem.RDS`. This is data from a project that I worked on and it should look like this.
+
+```{r, echo=FALSE}
+head(readRDS("data/final_practice_problem.RDS"))
+```
+
+```{r, echo=FALSE}
+relabundance_table <- readRDS("data/final_practice_problem.RDS")
+relative_abundance <- function(x){
+  abundance <- as.numeric(x[3])
+  sample_total <- sum(subset(relabundance_table, Sample==x[1])$Abundance)
+  return(abundance/sample_total)
+}
+
+relabundance_table$Abundance <- apply(relabundance_table,1,FUN=relative_abundance)
+
+p <- ggplot(relabundance_table, aes(x = as.factor(Sample), y = Abundance, fill = OTU))
+    p <- p + geom_bar(stat = "identity", width = 0.5)
+    p <- p + facet_grid(. ~ Treatment, space = "free", scales = "free")
+    p <- p + theme_bw()
+    p <- p + theme(axis.title.x=element_blank(),
+                    axis.text.x=element_blank(),
+                    axis.ticks.x=element_blank())
+    p <- p + theme(legend.key.size = unit(0.5,"line"))
+    p <- p + guides(fill=guide_legend(ncol=1))
+    p <- p + ylab("Relative Abundance\n")
+p
+```
+
+<br><br><br><br>
+Good luck in your data analysis! And if you can't find the answer online, never hesitate to ask a friend.
 
 [colors]:http://research.stowers.org/mcm/efg/R/Color/Chart/
 [hex]:https://htmlcolorcodes.com/

@@ -13,7 +13,7 @@ This is my tutorial, there are many like it, but this one is mine.
 **Downloads**: [R][R] and [RStudio][RS]
 
 [Rwhat]:https://www.r-project.org/about.html
-[Tut]:https://sdsmith1390.github.io/Tutorial_Basic_R/site/
+[Tut]:https://schuyler-smith.github.io/Tutorial_Basic_R/site/
 [P]:https://github.com/pommevilla
 [I]:https://www.bcb.iastate.edu/people/ian-braun
 [R]:https://mirror.las.iastate.edu/CRAN/
